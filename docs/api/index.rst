@@ -1,11 +1,13 @@
-API Reference
-=============
+Welcome to Quant-Kit's documentation!
+====================================
+
+.. include:: ../README.rst
 
 .. toctree::
-   :maxdepth: 1
-   :hidden:
+   :maxdepth: 2
 
-   metrics
-   returns
-   risk
-   rolling
+   usage/index
+   api/index
+
+* :ref:`genindex`
+* :ref:`search`
