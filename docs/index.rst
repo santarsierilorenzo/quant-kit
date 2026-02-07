@@ -11,6 +11,25 @@ complete performance reports.
 This documentation includes function signatures as well as detailed
 explanations of how and why each metric is implemented.
 
+Installation
+~~~~~~~~~~~~
+
+Quant-Kit can be installed using ``pip``:
+
+.. code-block:: bash
+
+   pip install quant-kit
+
+Import
+~~~~~~
+
+The recommended import pattern is the following:
+
+.. code-block:: python
+
+   import quant_kit as qt
+
+
 .. include:: ../README.rst
 
 .. toctree::
