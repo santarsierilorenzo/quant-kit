@@ -27,7 +27,6 @@ The recommended import pattern is the following:
 
    import quant_kit as qt
 
-
 Example
 ~~~~~~
 .. code-block:: python
