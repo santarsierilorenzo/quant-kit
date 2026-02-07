@@ -28,8 +28,6 @@ The recommended import pattern is the following:
    import quant_kit as qt
 
 
-.. include:: ../README.rst
-
 .. toctree::
    :maxdepth: 2
    :hidden:
