@@ -20,7 +20,7 @@ Quant-Kit can be installed using ``pip``:
    pip install quant-kit
 
 Import
-------
+~~~~~~~~~~~~~~~~~~~~
 The recommended import pattern is the following:
 
 .. code-block:: python
@@ -28,7 +28,7 @@ The recommended import pattern is the following:
    import quant_kit as qt
 
 Example
--------
+~~~~~~~~~~~~~~~~~~~~
 
 .. code-block:: python
 
