@@ -4,6 +4,7 @@ from typing import List
 import sys
 import os
 
+
 PROJECT_ROOT: str = os.path.abspath("..")
 sys.path.insert(0, PROJECT_ROOT)
 
