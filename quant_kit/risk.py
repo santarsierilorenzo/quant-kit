@@ -310,3 +310,56 @@ def drawdown_stats(
         "Drawdown Q2": float(np.round(np.quantile(dd_neg, 0.50), 2)),
         "Drawdown Q3": float(np.round(np.quantile(dd_neg, 0.75), 2)),
     }
+
+
+def tail_ratio(
+    returns: ArrayLike,
+) -> float:
+    """
+    Compute the tail ratio.
+
+    The tail ratio measures the asymmetry between the right tail and
+    the left tail of the return distribution. It is defined as the
+    ratio between the magnitude of an upper quantile and a lower
+    quantile of returns.
+
+    Parameters
+    ----------
+    returns
+        Sequence of periodic returns or PnL values.
+
+    Returns
+    -------
+    float
+        Tail ratio.
+
+    Notes
+    -----
+    The tail ratio is defined as:
+
+        TailRatio = |Q_{0.95}| / |Q_{0.05}|
+
+    where Q_p denotes the p-th empirical quantile of the return
+    distribution.
+
+    Interpretation:
+    - TailRatio > 1 indicates fatter right tails (more extreme gains).
+    - TailRatio < 1 indicates fatter left tails (more extreme losses).
+    - TailRatio ≈ 1 indicates symmetric tails.
+
+    NaN values are ignored. If the lower tail quantile is zero,
+    the tail ratio is undefined and NaN is returned.
+    """
+    arr = np.asarray(list(returns), dtype=float)
+    arr = arr[~np.isnan(arr)]
+
+    if arr.size == 0:
+        return np.nan
+
+    q_hi = np.quantile(arr, 0.95)
+    q_lo = np.quantile(arr, 0.05)
+
+    if q_lo == 0.0:
+        return np.nan
+
+    return float(np.abs(q_hi) / np.abs(q_lo))
