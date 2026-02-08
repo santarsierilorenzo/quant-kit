@@ -1,34 +1,34 @@
 .. raw:: html
 
-   <div class="hero">
+   <div class="hero-wrapper">
+     <div class="hero">
+       <div class="hero-content">
 
-     <div class="hero-content">
+         <h1 class="hero-title">Quant-Kit</h1>
 
-       <h1 class="hero-title">Quant-Kit</h1>
+         <p class="hero-subtitle">
+           A clean, modern Python library for quantitative finance metrics.
+         </p>
 
-       <p class="hero-subtitle">
-         A clean, modern Python library for quantitative finance metrics.
-       </p>
+         <p>
+           Quant-Kit provides a collection of widely used performance and risk
+           metrics designed for research, backtesting, and portfolio analysis.
+           The API is high-level, composable, and easy to integrate into existing
+           codebases.
+         </p>
 
-       <p>
-         Quant-Kit provides a collection of widely used performance and risk
-         metrics designed for research, backtesting, and portfolio analysis.
-         The API is high-level, composable, and easy to integrate into existing
-         codebases.
-       </p>
+         <p>
+           In addition to individual metrics, Quant-Kit emphasizes
+           <em>clarity</em> and <em>correctness</em>, offering documentation that
+           explains not only how each metric is computed, but also why specific
+           design choices were made.
+         </p>
 
-       <p>
-         In addition to individual metrics, Quant-Kit emphasizes
-         <em>clarity</em> and <em>correctness</em>, offering documentation that
-         explains not only how each metric is computed, but also why specific
-         design choices were made.
-       </p>
-
-       <div class="cta-row">
-         <a class="cta-pill cta-primary" href="getting_started.html">
-           <span class="cta-icon">🚀</span>
-           <span class="cta-text">Get Started</span>
-         </a>
+         <div class="cta-row">
+           <a class="cta-pill cta-primary" href="getting_started.html">
+             <span class="cta-icon">🚀</span>
+             <span class="cta-text">Get Started</span>
+           </a>
 
          <a class="cta-pill cta-secondary"
             href="https://github.com/your-org/quant-kit">

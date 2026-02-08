@@ -1,87 +1,65 @@
 /* =========================
-   HERO WRAPPER
+   HERO FIX – Sphinx container
 ========================= */
+
+.hero-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
 
 .hero {
+    width: 100%;
     max-width: 1200px;
-    margin: 3rem auto 4rem auto;
     padding: 0 2rem;
-
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 4rem;
-    align-items: center;
+    margin: 4rem auto 5rem auto;
 }
-
-/* =========================
-   HERO CONTENT
-========================= */
 
 .hero-content {
-    max-width: 640px;
+    max-width: 700px;
 }
 
 /* =========================
-   HERO TITLE
+   HERO TEXT
 ========================= */
 
 .hero-title {
-    font-size: 3.2rem;
+    font-size: 3rem;
     font-weight: 500;
-    line-height: 1.15;
-
-    margin: 0 0 1.2rem 0;
+    margin: 0 0 1.25rem 0;
 }
-
-/* =========================
-   HERO SUBTITLE
-========================= */
 
 .hero-subtitle {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--color-foreground-muted);
-
-    margin: 0 0 1.6rem 0;
+    margin-bottom: 1.5rem;
 }
 
 /* =========================
-   HERO BODY TEXT
-========================= */
-
-.hero-content p {
-    margin: 0 0 1.2rem 0;
-}
-
-/* =========================
-   CTA ROW
+   CTA
 ========================= */
 
 .cta-row {
     display: flex;
     gap: 1rem;
-
     margin-top: 2rem;
+    flex-wrap: wrap;
 }
-
-/* =========================
-   CTA BASE
-========================= */
 
 .cta-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
 
-    padding: 0.75rem 1.4rem;
+    padding: 0.75rem 1.3rem;
     border-radius: 999px;
 
-    font-size: 0.95rem;
     font-weight: 600;
+    font-size: 0.95rem;
     line-height: 1;
 
     text-decoration: none;
     border: 1px solid transparent;
-    background: none;
 
     transition:
         background-color 0.2s ease,
@@ -89,27 +67,14 @@
         border-color 0.2s ease;
 }
 
-.cta-pill svg {
-    display: block;
-    fill: currentColor;
-}
-
-/* =========================
-   CTA PRIMARY
-========================= */
-
 .cta-primary {
     background-color: #355fd3;
     color: #ffffff;
 }
 
 .cta-primary:hover {
-    background-color: #2f54c7;
+    background-color: #3f6ae1;
 }
-
-/* =========================
-   CTA SECONDARY
-========================= */
 
 .cta-secondary {
     background-color: transparent;
@@ -123,76 +88,15 @@
     color: #e9d5ff;
 }
 
-/* =========================
-   HERO VISUAL (LOGO DX)
-========================= */
-
-.hero-visual {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.hero-visual img {
-    width: 260px;
-    max-width: 100%;
-    height: auto;
-
-    filter: drop-shadow(
-        0 18px 48px rgba(0, 0, 0, 0.45)
-    );
+.cta-pill svg {
+    fill: currentColor;
 }
 
 /* =========================
-   NAVBAR LOGO SIZE (Breeze)
+   NAVBAR LOGO (ingrandito)
 ========================= */
 
-.navbar-brand img,
-.navbar-brand svg {
-    height: 64px !important;
-    width: auto !important;
-    max-height: none !important;
-}
-
-.navbar-brand {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-}
-
-
-/* =========================
-   REMOVE EXCESS TOP GAP
-========================= */
-
-main {
-    padding-top: 0 !important;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width: 900px) {
-    .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 3rem;
-    }
-
-    .hero-content {
-        max-width: none;
-    }
-
-    .hero-visual {
-        order: -1;
-    }
-
-    .cta-row {
-        justify-content: center;
-    }
-
-    .hero-visual img {
-        width: 200px;
-    }
+.navbar-brand img {
+    height: 40px;
+    width: auto;
 }
