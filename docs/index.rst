@@ -3,7 +3,7 @@
    <div class="hero-wrapper">
      <div class="hero">
 
-       <img src="_static/logo.svg"
+       <img src="/_static/logo.svg"
             class="hero-logo-right"
             alt="Quant-Kit logo" />
 
