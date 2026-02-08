@@ -35,7 +35,6 @@ source_suffix = ".rst"
 html_theme: str = "sphinx_rtd_theme"
 html_static_path: List[str] = ["_static"]
 
-
 def setup(app) -> None:
-    """Register custom CSS files."""
     app.add_css_file("custom.css")
+    app.add_js_file("custom.js")

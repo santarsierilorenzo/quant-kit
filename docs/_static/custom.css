@@ -1,22 +1,18 @@
-.section-box {
-    margin: 32px 0;
-}
-
-.section-title {
+dl.field-list dt span.field-name.qk-section-label {
     display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 12px;
+    margin: 10px 0 12px 0;
 
     border: 1px solid #3b3f46;
     border-radius: 6px;
     background-color: #1e2228;
 
     font-weight: 700;
-    text-transform: uppercase;
     letter-spacing: 0.05em;
+    text-transform: uppercase;
     color: #7fbfff;
 }
 
-.section-body dl {
+dl.field-list dd {
     margin-left: 0;
 }
