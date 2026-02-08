@@ -1,4 +1,4 @@
 sphinx
-breeze
+sphinx-breeze-theme
 pandas
 numpy
