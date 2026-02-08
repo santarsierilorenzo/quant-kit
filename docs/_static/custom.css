@@ -147,3 +147,16 @@
         --content-width: 1600px;
     }
 }
+
+/* =========================================================
+   REDUCE SECTION TITLES (Overview)
+========================================================= */
+
+/* Target section titles inside page content */
+.bd-article h2,
+.bd-article h3 {
+    font-size: 1.35rem;
+    font-weight: 500;
+    margin-top: 2.25rem;
+    margin-bottom: 1rem;
+}

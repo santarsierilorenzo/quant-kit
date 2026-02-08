@@ -69,7 +69,6 @@
              <span class="cta-text">View on GitHub</span>
            </a>
          </div>
-
        </div>
      </div>
    </div>
