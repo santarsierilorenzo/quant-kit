@@ -3,7 +3,7 @@
 ========================= */
 
 .hero-wrapper {
-    margin-top: 2rem;
+    margin-top: 0.75rem;
 }
 
 /* =========================
@@ -12,8 +12,8 @@
 
 .hero {
     max-width: 880px;
-    margin: 0 auto 4rem auto;
-    padding: 0 2rem;
+    margin: 0 auto 3rem auto;
+    padding: 0;
 }
 
 /* =========================
@@ -94,21 +94,21 @@
 }
 
 /* =========================
-   OVERVIEW SECTION
+   OVERVIEW ALIGNMENT
+   (Sphinx-Design grid wrapper)
 ========================= */
 
 h2#overview {
     max-width: 880px;
-    margin: 4rem auto 2rem auto;
-    padding: 0 2rem;
+    margin: 3rem auto 1.5rem auto;
+    padding: 0;
 }
 
-/* Align overview grid with hero */
-
-.bd-content .grid {
+/* Sphinx-Design wraps grids in sd-container-fluid */
+.bd-content .sd-container-fluid {
     max-width: 880px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0;
 }
 
 /* =========================
