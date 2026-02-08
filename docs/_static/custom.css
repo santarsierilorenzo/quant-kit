@@ -1,16 +1,45 @@
-.btn {
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
+.cta-container {
+    display: flex;
+    gap: 1rem;
+    margin: 2rem 0 3rem 0;
+    flex-wrap: wrap;
 }
 
-.btn-primary {
+.cta-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    padding: 0.75rem 1.25rem;
+    border-radius: 999px;
+    font-weight: 600;
+    text-decoration: none;
+
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease;
+}
+
+.cta-card.primary {
     background-color: var(--color-brand-primary);
     color: white;
 }
 
-.btn-secondary {
+.cta-card.primary:hover {
+    background-color: var(--color-brand-primary-hover);
+}
+
+.cta-card.secondary {
     border: 1px solid var(--color-brand-primary);
     color: var(--color-brand-primary);
+}
+
+.cta-card.secondary:hover {
+    background-color: var(--color-brand-primary);
+    color: white;
+}
+
+.cta-icon {
+    display: inline-flex;
+    align-items: center;
 }

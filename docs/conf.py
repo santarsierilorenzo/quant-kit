@@ -8,7 +8,8 @@ import os
 PROJECT_ROOT: str = os.path.abspath("..")
 sys.path.insert(0, PROJECT_ROOT)
 
-project: str = "quant-kit"
+project = "Quant-Kit"
+html_title = "Quant-Kit"
 author: str = "Lorenzo Santarsieri"
 release: str = "0.1.0"
 
