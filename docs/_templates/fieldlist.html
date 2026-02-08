@@ -1,0 +1,13 @@
+{% if field_list %}
+<div class="section-box">
+  <div class="section-title">{{ field_list[0][0] }}</div>
+  <div class="section-body">
+    <dl class="field-list">
+      {% for field_name, field_body in field_list[1:] %}
+        <dt>{{ field_name }}</dt>
+        <dd>{{ field_body }}</dd>
+      {% endfor %}
+    </dl>
+  </div>
+</div>
+{% endif %}

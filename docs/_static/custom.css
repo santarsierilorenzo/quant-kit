@@ -1,12 +1,9 @@
-dl.field-list {
+.section-box {
     margin: 32px 0;
-    padding: 0;
 }
 
-dl.field-list > dt {
-    display: block;
-    width: fit-content;
-
+.section-title {
+    display: inline-block;
     padding: 6px 12px;
     margin-bottom: 12px;
 
@@ -15,16 +12,11 @@ dl.field-list > dt {
     background-color: #1e2228;
 
     font-weight: 700;
-    letter-spacing: 0.05em;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
     color: #7fbfff;
 }
 
-dl.field-list > dd {
+.section-body dl {
     margin-left: 0;
-    padding-left: 0;
-}
-
-dl.field-list {
-    display: block;
 }
