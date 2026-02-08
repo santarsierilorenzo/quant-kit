@@ -15,6 +15,7 @@ release: str = "0.1.0"
 extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
+    "sphinx.ext.mathjax",
 ]
 
 autosummary_generate = True
