@@ -41,7 +41,8 @@ def cum_returns(
     Returns
     -------
     pandas.Series or numpy.ndarray
-        Cumulative performance series.
+        Cumulative performance series. The output type matches the input
+        type when possible.
 
     Notes
     -----
