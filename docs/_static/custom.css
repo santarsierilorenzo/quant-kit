@@ -1,12 +1,91 @@
 /* =========================
+   NAVBAR LOGO
+========================= */
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+}
+
+
+/* =========================
+   GLOBAL LAYOUT FIX
+========================= */
+
+main {
+    padding-top: 0 !important;
+}
+
+
+/* =========================
+   HERO LAYOUT (Breeze-like)
+========================= */
+
+.hero {
+    max-width: 1200px;
+    margin: 2.5rem auto 4rem auto;
+    padding: 0 2rem;
+
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+
+/* =========================
+   HERO TITLE
+========================= */
+
+.hero-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    margin-bottom: 0.75rem;
+}
+
+.hero-title h1 {
+    margin: 0;
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+.hero-title img {
+    width: 96px;
+    height: 96px;
+    opacity: 0.95;
+}
+
+
+/* =========================
+   HERO TEXT
+========================= */
+
+.hero-subtitle {
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+
+    font-size: 1.1rem;
+    color: var(--color-foreground-muted);
+}
+
+.hero-content p {
+    margin-top: 0;
+    margin-bottom: 1.1rem;
+}
+
+
+/* =========================
    CTA
 ========================= */
 
 .cta-row {
     display: flex;
     gap: 1rem;
-    margin: 2rem 0 3rem 0;
     flex-wrap: wrap;
+
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
 }
 
 .cta-pill {
@@ -14,17 +93,16 @@
     align-items: center;
     gap: 0.6rem;
 
-    padding: 0.75rem 1.3rem;
+    padding: 0.75rem 1.35rem;
     border-radius: 999px;
 
-    font-weight: 600;
     font-size: 0.95rem;
+    font-weight: 600;
     line-height: 1;
 
     text-decoration: none;
-
-    border: 1px solid transparent;
     background: none;
+    border: 1px solid transparent;
 
     transition:
         background-color 0.2s ease,
@@ -37,8 +115,6 @@
     align-items: center;
 }
 
-/* Primary CTA */
-
 .cta-primary {
     background-color: #355fd3;
     color: #ffffff;
@@ -47,8 +123,6 @@
 .cta-primary:hover {
     background-color: #3f6ae1;
 }
-
-/* Secondary CTA */
 
 .cta-secondary {
     background-color: transparent;
@@ -62,62 +136,10 @@
     color: #e9d5ff;
 }
 
-/* SVG inherits text color */
-
 .cta-pill svg {
     fill: currentColor;
 }
 
-/* =========================
-   HERO LAYOUT
-========================= */
-
-.hero {
-    max-width: 1200px;
-    margin: 4rem auto 5rem auto;
-    padding: 0 2rem;
-
-    display: grid;
-    grid-template-columns: 1fr;
-}
-
-/* =========================
-   HERO TEXT
-========================= */
-
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.hero-subtitle {
-    font-size: 1.1rem;
-    color: var(--color-foreground-muted);
-    margin-bottom: 1.5rem;
-}
-
-/* =========================
-   HERO TITLE (Breeze-like)
-========================= */
-
-.hero-title {
-    display: inline-flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-bottom: 1.5rem;
-}
-
-.hero-title h1 {
-    margin: 0;
-    font-size: 3rem;
-    font-weight: 500;
-}
-
-.hero-title img {
-    width: 64px;
-    height: 64px;
-    opacity: 0.9;
-}
 
 /* =========================
    RESPONSIVE
@@ -136,4 +158,3 @@
         justify-content: center;
     }
 }
-
