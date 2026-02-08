@@ -4,9 +4,10 @@
      <div class="hero-content">
 
        <div class="hero-title">
-         <img src="_static/logo.svg" alt="Quant-Kit logo">
-         <h1>Quant-Kit</h1>
+        <h1>Quant-Kit</h1>
+        <img src="_static/logo.svg" alt="Quant-Kit logo">
        </div>
+
 
        <p class="hero-subtitle">
          A clean, modern Python library for quantitative finance metrics.
