@@ -1,4 +1,4 @@
 sphinx
-sphinx-breeze
+breeze
 pandas
 numpy
