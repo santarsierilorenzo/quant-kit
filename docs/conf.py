@@ -32,10 +32,11 @@ exclude_patterns: List[str] = [
 
 source_suffix = ".rst"
 
-html_theme = "furo"
+html_theme = "sphinxawesome_theme"
 
 html_theme_options = {
-    "navigation_with_keys": True,
+    "show_scrolltop": True,
+    "show_prev_next": True,
 }
 
 html_static_path = ["_static"]
