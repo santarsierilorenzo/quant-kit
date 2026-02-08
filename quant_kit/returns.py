@@ -17,7 +17,7 @@ def cum_returns(
 
     This function transforms a sequence of returns or profit-and-loss (PnL)
     values into a cumulative performance series. The aggregation method
-    depends on the selected ``kind``.
+    depends on the selected ``kind`` parameter.
 
     Parameters
     ----------
@@ -59,10 +59,12 @@ def cum_returns(
 
         R_t = \\prod_{i=1}^{t} (1 + r_i) - 1
 
-    where :math:`r_i` denotes the simple return at time :math:`i`.
+    where :math:`r_i` denotes the simple (decimal) return at time
+    :math:`i`, and :math:`R_t` is the cumulative return up to time
+    :math:`t`.
 
-    For log-returns and PnL values, cumulative performance is computed using
-    an additive aggregation:
+    For log-returns and PnL values, cumulative performance is computed
+    using an additive aggregation:
 
     .. math::
 
@@ -71,10 +73,10 @@ def cum_returns(
     Log-returns are additive by definition, and PnL values represent
     additive changes in value.
 
-    Missing values (NaNs) in the input series are treated as zeros prior to
-    aggregation.
+    Missing values (NaNs) in the input series are treated as zeros prior
+    to aggregation.
     """
-    
+
     if kind not in {"simple", "pnl", "log"}:
         raise ValueError("`kind` must be one of {'simple', 'pnl', 'log'}.")
 

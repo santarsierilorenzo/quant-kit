@@ -1,23 +1,22 @@
-/* Quant-Kit: Notes highlight */
+/* Quant-Kit Notes box */
 .qk-notes {
-    margin-top: 2em;
+    margin: 2em 0;
     padding: 1.2em 1.2em 0.8em;
     border: 1px solid rgba(255, 255, 255, 0.10);
-    border-radius: 6px;
+    border-radius: 8px;
     background: rgba(255, 255, 255, 0.03);
 }
 
-/* Make the "Notes" title look like a header bar */
-.qk-notes > .section > h2,
-.qk-notes > .section > h3 {
+/* Highlight the Notes title inside the box */
+.qk-notes h2,
+.qk-notes h3 {
     margin-top: 0;
     padding: 0.4em 0.7em;
-    border-radius: 4px;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.08);
-    font-size: 1.05em;
 }
 
-/* Slightly increase spacing for math inside notes */
+/* Give math a bit of breathing room */
 .qk-notes .math {
-    margin: 1em 0;
+    margin: 1.1em 0;
 }
