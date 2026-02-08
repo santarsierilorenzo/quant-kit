@@ -10,6 +10,7 @@ sys.path.insert(0, PROJECT_ROOT)
 
 project = "Quant-Kit"
 html_title = "Quant-Kit"
+html_logo = "_static/logo.png"
 author: str = "Lorenzo Santarsieri"
 release: str = "0.1.0"
 
