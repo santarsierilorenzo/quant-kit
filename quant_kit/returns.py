@@ -15,27 +15,64 @@ def cum_returns(
     """
     Compute cumulative performance over time.
 
+    This function transforms a sequence of returns or profit-and-loss (PnL)
+    values into a cumulative performance series. The aggregation method
+    depends on the selected ``kind``.
+
     Parameters
     ----------
     returns : array-like
-        Input sequence of returns or PnL values. Interpretation depends on
-        the ``kind`` parameter.
+        Input sequence of returns or PnL values. The interpretation of the
+        input depends on the ``kind`` parameter.
 
-        This parameter is typically a 1-dimensional array-like object
-        such as a ``numpy.ndarray`` or ``pandas.Series``.
+        This is typically a one-dimensional array-like object such as a
+        ``numpy.ndarray`` or ``pandas.Series``.
 
     kind : {"simple", "pnl", "log"}, optional
         Type of input values.
 
-        - ``"simple"``: simple (decimal) returns
-        - ``"log"``: log-returns
-        - ``"pnl"``: additive PnL
+        - ``"simple"``: simple (decimal) returns, compounded multiplicatively
+        - ``"log"``: log-returns, aggregated additively
+        - ``"pnl"``: additive profit-and-loss values
 
     starting_value : float, optional
         Initial cumulative level.
 
-        This value shifts the cumulative series by a constant amount.
+        This value shifts the cumulative series by a constant amount and can
+        be used, for example, to express cumulative performance in monetary
+        terms.
+
+    Returns
+    -------
+    pandas.Series or numpy.ndarray
+        Cumulative performance series. The output type matches the input
+        type when possible.
+
+    Notes
+    -----
+    For simple returns, cumulative performance is computed using
+    multiplicative compounding:
+
+    .. math::
+
+       R_t = \\prod_{i=1}^{t} (1 + r_i) - 1
+
+    where :math:`r_i` denotes the simple return at time :math:`i`.
+
+    For log-returns and PnL values, cumulative performance is computed using
+    an additive aggregation:
+
+    .. math::
+
+       R_t = \\sum_{i=1}^{t} r_i
+
+    Log-returns are additive by definition, and PnL values represent
+    additive changes in value.
+
+    Missing values (NaNs) in the input series are treated as zeros prior to
+    aggregation.
     """
+
     if kind not in {"simple", "pnl", "log"}:
         raise ValueError("`kind` must be one of {'simple', 'pnl', 'log'}.")
 
