@@ -1,5 +1,5 @@
-sphinx
+sphinx>=6
+sphinx-design>=0.5
 sphinx-breeze-theme
-sphinx-design
 pandas
 numpy
