@@ -1,7 +1,6 @@
 .. image:: _static/logo.svg
-   :height: 8.5rem
    :align: right
-   :alt: Quant-Kit logo
+   :height: 8.5rem
 
 
 Quant-Kit
@@ -18,52 +17,50 @@ In addition to individual metrics, Quant-Kit emphasizes *clarity* and
 is computed, but also why specific design choices were made.
 
 
-.. container:: sd-mb-4
+.. raw:: html
 
-   .. button-ref:: installation/index
-      :color: primary
-      :rounded:
-      :shadow:
+   <div class="hero-wrapper">
+     <div class="hero">
+       <div class="hero-content">
 
-      🚀 Get Started
+         <div class="cta-row">
+           <a class="cta-pill cta-primary" href="installation/index.html">
+             <span class="cta-icon">🚀</span>
+             <span class="cta-text">Get Started</span>
+           </a>
 
-   .. button-link:: https://github.com/your-org/quant-kit
-      :color: secondary
-      :outline:
-      :rounded:
+           <a class="cta-pill cta-secondary"
+              href="https://github.com/your-org/quant-kit">
+             <span class="cta-icon">🐙</span>
+             <span class="cta-text">View on GitHub</span>
+           </a>
+         </div>
 
-      :octicon:`mark-github` View on GitHub
+       </div>
+     </div>
+   </div>
 
 
 Overview
 ~~~~~~~~
 
 .. grid:: 3
-   :gutter: 3
+   :gutter: 2
 
-   .. grid-item-card::
-      :shadow:
-      :padding: 3
-
-      📊 **Performance Metrics**
+   .. grid-item-card:: 📊 Performance Metrics
+      :link: api/returns.html
 
       Portfolio and strategy performance metrics such as cumulative returns,
       Sharpe ratio, drawdowns, volatility, and related statistics.
 
-   .. grid-item-card::
-      :shadow:
-      :padding: 3
-
-      ⚠️ **Risk Analysis**
+   .. grid-item-card:: ⚠️ Risk Analysis
+      :link: api/risk.html
 
       Downside and tail-risk measures, including value-at-risk,
       expected shortfall, and stress-oriented indicators.
 
-   .. grid-item-card::
-      :shadow:
-      :padding: 3
-
-      🧪 **Research Tools**
+   .. grid-item-card:: 🧪 Research Tools
+      :link: api/research.html
 
       Utilities designed for quantitative research workflows, including
       factor analysis helpers and strategy evaluation tools.
