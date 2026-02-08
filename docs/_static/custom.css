@@ -118,3 +118,28 @@ section,
 .bd-content {
     max-width: 100%;
 }
+
+/* =========================
+   FIX BREEZE TOP SPACING
+========================= */
+
+/* Remove top padding added by Breeze */
+.bd-content {
+    padding-top: 0 !important;
+}
+
+.bd-article {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+
+/* Ensure hero sticks to top */
+.hero-wrapper {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Optional: tighten hero vertical rhythm */
+.hero {
+    margin-top: 2.5rem;
+}
