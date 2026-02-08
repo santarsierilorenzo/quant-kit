@@ -32,9 +32,13 @@ exclude_patterns: List[str] = [
 
 source_suffix = ".rst"
 
-html_theme: str = "sphinx_rtd_theme"
-html_static_path: List[str] = ["_static"]
+html_theme = "pydata_sphinx_theme"
 
-def setup(app) -> None:
-    app.add_css_file("custom.css")
-    app.add_js_file("custom.js")
+html_theme_options = {
+    "show_toc_level": 2,
+    "navigation_depth": 2,
+    "collapse_navigation": False,
+    "show_nav_level": 2,
+}
+
+html_static_path = ["_static"]
