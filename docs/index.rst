@@ -1,6 +1,3 @@
-Quant-Kit
-=========
-
 .. raw:: html
 
    <div class="hero-wrapper">
