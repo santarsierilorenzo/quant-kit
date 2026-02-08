@@ -18,6 +18,7 @@ extensions = [
 ]
 
 autosummary_generate = True
+autodoc_typehints = "none"
 
 templates_path: List[str] = ["_templates"]
 exclude_patterns: List[str] = [
