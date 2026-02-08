@@ -1,99 +1,78 @@
 /* =========================
-   NAVBAR LOGO
-========================= */
-
-.navbar-brand img {
-    height: 40px;
-    width: auto;
-}
-
-
-/* =========================
-   GLOBAL LAYOUT FIX
-========================= */
-
-main {
-    padding-top: 0 !important;
-}
-
-
-/* =========================
-   HERO LAYOUT (Breeze-like)
+   HERO WRAPPER
 ========================= */
 
 .hero {
     max-width: 1200px;
-    margin: 2.5rem auto 4rem auto;
+    margin: 3rem auto 4rem auto;
     padding: 0 2rem;
 
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
 }
 
+/* =========================
+   HERO CONTENT
+========================= */
+
+.hero-content {
+    max-width: 640px;
+}
 
 /* =========================
    HERO TITLE
 ========================= */
 
 .hero-title {
-    display: inline-flex;
-    align-items: center;
-    gap: 1.5rem;
-
-    margin-bottom: 0.75rem;
-}
-
-.hero-title h1 {
-    margin: 0;
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: 500;
-    line-height: 1.1;
-}
+    line-height: 1.15;
 
-.hero-title img {
-    width: 96px;
-    height: 96px;
-    opacity: 0.95;
+    margin: 0 0 1.2rem 0;
 }
-
 
 /* =========================
-   HERO TEXT
+   HERO SUBTITLE
 ========================= */
 
 .hero-subtitle {
-    margin-top: 0;
-    margin-bottom: 1.25rem;
-
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--color-foreground-muted);
-}
 
-.hero-content p {
-    margin-top: 0;
-    margin-bottom: 1.1rem;
+    margin: 0 0 1.6rem 0;
 }
-
 
 /* =========================
-   CTA
+   HERO BODY TEXT
+========================= */
+
+.hero-content p {
+    margin: 0 0 1.2rem 0;
+}
+
+/* =========================
+   CTA ROW
 ========================= */
 
 .cta-row {
     display: flex;
     gap: 1rem;
-    flex-wrap: wrap;
 
-    margin-top: 1.5rem;
-    margin-bottom: 3rem;
+    margin-top: 2rem;
 }
+
+/* =========================
+   CTA BASE
+========================= */
 
 .cta-pill {
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
 
-    padding: 0.75rem 1.35rem;
+    padding: 0.75rem 1.4rem;
     border-radius: 999px;
 
     font-size: 0.95rem;
@@ -101,8 +80,8 @@ main {
     line-height: 1;
 
     text-decoration: none;
-    background: none;
     border: 1px solid transparent;
+    background: none;
 
     transition:
         background-color 0.2s ease,
@@ -110,10 +89,14 @@ main {
         border-color 0.2s ease;
 }
 
-.cta-pill .cta-icon {
-    display: inline-flex;
-    align-items: center;
+.cta-pill svg {
+    display: block;
+    fill: currentColor;
 }
+
+/* =========================
+   CTA PRIMARY
+========================= */
 
 .cta-primary {
     background-color: #355fd3;
@@ -121,8 +104,12 @@ main {
 }
 
 .cta-primary:hover {
-    background-color: #3f6ae1;
+    background-color: #2f54c7;
 }
+
+/* =========================
+   CTA SECONDARY
+========================= */
 
 .cta-secondary {
     background-color: transparent;
@@ -136,10 +123,42 @@ main {
     color: #e9d5ff;
 }
 
-.cta-pill svg {
-    fill: currentColor;
+/* =========================
+   HERO VISUAL (LOGO DX)
+========================= */
+
+.hero-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.hero-visual img {
+    width: 260px;
+    max-width: 100%;
+    height: auto;
+
+    filter: drop-shadow(
+        0 18px 48px rgba(0, 0, 0, 0.45)
+    );
+}
+
+/* =========================
+   NAVBAR LOGO
+========================= */
+
+.navbar-brand img {
+    height: 42px;
+    width: auto;
+}
+
+/* =========================
+   REMOVE EXCESS TOP GAP
+========================= */
+
+main {
+    padding-top: 0 !important;
+}
 
 /* =========================
    RESPONSIVE
@@ -147,14 +166,24 @@ main {
 
 @media (max-width: 900px) {
     .hero {
+        grid-template-columns: 1fr;
         text-align: center;
+        gap: 3rem;
     }
 
-    .hero-title {
-        justify-content: center;
+    .hero-content {
+        max-width: none;
+    }
+
+    .hero-visual {
+        order: -1;
     }
 
     .cta-row {
         justify-content: center;
+    }
+
+    .hero-visual img {
+        width: 200px;
     }
 }

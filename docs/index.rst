@@ -1,13 +1,10 @@
 .. raw:: html
 
    <div class="hero">
+
      <div class="hero-content">
 
-       <div class="hero-title">
-        <h1>Quant-Kit</h1>
-        <img src="_static/logo.svg" alt="Quant-Kit logo">
-       </div>
-
+       <h1 class="hero-title">Quant-Kit</h1>
 
        <p class="hero-subtitle">
          A clean, modern Python library for quantitative finance metrics.
@@ -74,6 +71,12 @@
        </div>
 
      </div>
+
+     <div class="hero-visual">
+       <img src="_static/logo.svg"
+            alt="Quant-Kit logo">
+     </div>
+
    </div>
 
 
@@ -100,6 +103,7 @@ Overview
 
       Utilities designed for quantitative research workflows, including
       factor analysis helpers and strategy evaluation tools.
+
 
 .. toctree::
    :hidden:
