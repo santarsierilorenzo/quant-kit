@@ -74,11 +74,6 @@
      </div>
    </div>
 
-.. raw:: html
-
-   <div class="layout-reset"></div>
-
-
 Overview
 --------
 
