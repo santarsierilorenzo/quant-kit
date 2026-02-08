@@ -2,6 +2,11 @@
 
    <div class="hero-wrapper">
      <div class="hero">
+
+       <img src="_static/logo.svg"
+            class="hero-logo-right"
+            alt="Quant-Kit logo" />
+
        <div class="hero-content">
 
          <h1 class="hero-title">Quant-Kit</h1>
@@ -93,7 +98,6 @@
 
       Utilities designed for quantitative research workflows, including
       factor analysis helpers and strategy evaluation tools.
-
 
 .. toctree::
    :hidden:
