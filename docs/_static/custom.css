@@ -1,4 +1,7 @@
-/* CTA row */
+/* =========================
+   CTA
+========================= */
+
 .cta-row {
     display: flex;
     gap: 1rem;
@@ -6,7 +9,6 @@
     flex-wrap: wrap;
 }
 
-/* Shared pill style */
 .cta-pill {
     display: inline-flex;
     align-items: center;
@@ -20,17 +22,22 @@
     line-height: 1;
 
     text-decoration: none;
-    border: 1px solid transparent;
 
-    transition: background-color 0.2s ease,
-                color 0.2s ease,
-                border-color 0.2s ease;
+    border: 1px solid transparent;
+    background: none;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .cta-pill .cta-icon {
     display: inline-flex;
     align-items: center;
 }
+
+/* Primary CTA */
 
 .cta-primary {
     background-color: #355fd3;
@@ -41,9 +48,11 @@
     background-color: #3f6ae1;
 }
 
+/* Secondary CTA */
+
 .cta-secondary {
     background-color: transparent;
-    border: 1px solid #8b5cf6;
+    border-color: #8b5cf6;
     color: #c4b5fd;
 }
 
@@ -53,10 +62,15 @@
     color: #e9d5ff;
 }
 
+/* SVG inherits text color */
 
 .cta-pill svg {
     fill: currentColor;
 }
+
+/* =========================
+   HERO LAYOUT
+========================= */
 
 .hero {
     display: grid;
@@ -66,6 +80,10 @@
     align-items: center;
     margin: 3rem 0 4rem 0;
 }
+
+/* =========================
+   HERO TEXT
+========================= */
 
 .hero-content h1 {
     font-size: 3rem;
@@ -78,13 +96,36 @@
     margin-bottom: 1.5rem;
 }
 
+/* =========================
+   HERO VISUAL
+   (NO background, NO box)
+========================= */
+
 .hero-visual {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Responsive */
+/* Image only, floating effect */
+
+.hero-visual img {
+    max-width: 100%;
+    max-height: 320px;
+
+    background: none;
+    border: none;
+    border-radius: 0;
+
+    filter: drop-shadow(
+        0 6px 18px rgba(0, 0, 0, 0.35)
+    );
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 900px) {
     .hero {
         grid-template-columns: 1fr;
@@ -98,14 +139,4 @@
     .cta-row {
         justify-content: center;
     }
-}
-
-.hero-visual {
-    background: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.04),
-        transparent 70%
-    );
-    border-radius: 24px;
-    padding: 2rem;
 }
