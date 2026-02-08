@@ -30,13 +30,13 @@
          </p>
 
          <div class="cta-row">
-           <a class="cta-pill cta-primary" href="getting_started.html">
+           <a class="cta-pill cta-primary" href="installation/">
              <span class="cta-icon">🚀</span>
              <span class="cta-text">Get Started</span>
            </a>
 
            <a class="cta-pill cta-secondary"
-              href="https://github.com/your-org/quant-kit">
+              href="https://github.com/santarsierilorenzo/quant-kit">
              <span class="cta-icon">
                <svg xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
