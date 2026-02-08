@@ -134,27 +134,16 @@
     width: auto;
 }
 
-@media (min-width: 1400px) {
-
-    /* Main container */
-    .bd-main,
-    .bd-container,
-    .bd-page {
-        max-width: 1400px !important;
+@media (min-width: 1200px) {
+    :root {
+        --page-width: 1400px;
+        --content-width: 1400px;
     }
+}
 
-    /* Article/content */
-    .bd-content,
-    .bd-article {
-        max-width: 1400px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-    }
-
-    /* Sphinx-design grids */
-    .sd-container-fluid {
-        max-width: 1400px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
+@media (min-width: 1600px) {
+    :root {
+        --page-width: 1600px;
+        --content-width: 1600px;
     }
 }
