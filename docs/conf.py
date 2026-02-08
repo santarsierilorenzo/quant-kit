@@ -12,10 +12,12 @@ project: str = "quant-kit"
 author: str = "Lorenzo Santarsieri"
 release: str = "0.1.0"
 
-extensions: List[str] = [
-    "sphinx.ext.autodoc",
+extensions = [
+    "sphinx.ext.autosummary",
     "sphinx.ext.napoleon",
 ]
+
+autosummary_generate = True
 
 templates_path: List[str] = ["_templates"]
 exclude_patterns: List[str] = [
