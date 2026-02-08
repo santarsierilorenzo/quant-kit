@@ -38,17 +38,10 @@ def cum_returns(
     starting_value : float, optional
         Initial cumulative level.
 
-        This value shifts the cumulative series by a constant amount and can
-        be used, for example, to express cumulative performance in monetary
-        terms.
-
     Returns
     -------
     pandas.Series or numpy.ndarray
-        Cumulative performance series. The output type matches the input
-        type when possible.
-
-    .. container:: qk-notes
+        Cumulative performance series.
 
     Notes
     -----
@@ -57,24 +50,17 @@ def cum_returns(
 
     .. math::
 
-        R_t = \\prod_{i=1}^{t} (1 + r_i) - 1
+    R_t = \\prod_{i=1}^{t} (1 + r_i) - 1
 
-    where :math:`r_i` denotes the simple (decimal) return at time
-    :math:`i`, and :math:`R_t` is the cumulative return up to time
-    :math:`t`.
-
-    For log-returns and PnL values, cumulative performance is computed
-    using an additive aggregation:
+    For log-returns and PnL values, cumulative performance is computed using
+    an additive aggregation:
 
     .. math::
 
-        R_t = \\sum_{i=1}^{t} r_i
+    R_t = \\sum_{i=1}^{t} r_i
 
-    Log-returns are additive by definition, and PnL values represent
-    additive changes in value.
-
-    Missing values (NaNs) in the input series are treated as zeros prior
-    to aggregation.
+    Missing values (NaNs) in the input series are treated as zeros prior to
+    aggregation.
     """
 
     if kind not in {"simple", "pnl", "log"}:

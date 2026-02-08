@@ -33,5 +33,5 @@ source_suffix = ".rst"
 
 html_theme: str = "sphinx_rtd_theme"
 
-html_static_path: List[str] = ["_static"]
-html_css_files: List[str] = ["custom.css"]
+html_static_path = ["_static"]
+html_css_files = ["custom.css"]
