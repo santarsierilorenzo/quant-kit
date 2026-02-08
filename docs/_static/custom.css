@@ -1,22 +1,19 @@
 /* =========================
-   HERO FIX – Sphinx container
+   HERO WRAPPER
 ========================= */
 
 .hero-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
+    margin-top: 2rem;
 }
+
+/* =========================
+   HERO LAYOUT
+========================= */
 
 .hero {
-    width: 100%;
-    max-width: 1200px;
+    max-width: 880px;
+    margin: 0 auto 4rem auto;
     padding: 0 2rem;
-    margin: 4rem auto 5rem auto;
-}
-
-.hero-content {
-    max-width: 700px;
 }
 
 /* =========================
@@ -33,6 +30,10 @@
     font-size: 1.1rem;
     color: var(--color-foreground-muted);
     margin-bottom: 1.5rem;
+}
+
+.hero-content p {
+    margin-bottom: 1.2rem;
 }
 
 /* =========================
@@ -93,59 +94,28 @@
 }
 
 /* =========================
-   NAVBAR LOGO (ingrandito)
+   OVERVIEW SECTION
+========================= */
+
+h2#overview {
+    max-width: 880px;
+    margin: 4rem auto 2rem auto;
+    padding: 0 2rem;
+}
+
+/* Align overview grid with hero */
+
+.bd-content .grid {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* =========================
+   NAVBAR LOGO
 ========================= */
 
 .navbar-brand img {
-    height: 80px;
+    height: 40px;
     width: auto;
-}
-
-/* =========================
-   LAYOUT RESET AFTER RAW HTML
-========================= */
-
-.layout-reset {
-    clear: both;
-    width: 100%;
-    height: 0;
-}
-
-/* Ensure following sections are centered */
-
-section,
-.bd-article,
-.bd-content {
-    max-width: 100%;
-}
-
-/* =========================
-   BREEZE: KILL GHOST HEADER
-========================= */
-
-/* Remove invisible page header */
-.page-header {
-    display: none !important;
-    height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-/* Remove spacing before main content */
-main {
-    padding-top: 0 !important;
-}
-
-/* Remove article spacing */
-.bd-article,
-.bd-content {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-}
-
-/* Hero must start immediately */
-.hero-wrapper,
-.hero {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
 }
