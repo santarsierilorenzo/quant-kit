@@ -81,50 +81,61 @@ def cum_returns(
 
 
 def annual_return(
-    returns: Union[pd.Series, np.ndarray],
+    returns: ArrayLike,
     frequency: Frequency,
     kind: Literal["simple", "log", "pnl"] = "simple",
 ) -> float:
     """
-    Compute annualized performance.
+    Compute the annualized performance of a return or PnL series.
 
-    For simple and log returns, this function computes the Compound
-    Annual Growth Rate (CAGR). For PnL inputs, it returns the average
-    annual PnL.
+    Simple and log returns are annualized using the CAGR.
+    PnL values are annualized using the arithmetic mean.
 
     Parameters
     ----------
-    returns
-        Input time series:
-        - kind="simple": simple (decimal) returns
-        - kind="log": log-returns
-        - kind="pnl": additive PnL
-    frequency
-        Frequency of the input data:
-        - "D": daily
-        - "W": weekly
-        - "M": monthly
-        - "Y": yearly
-    kind
-        Type of input values.
+    returns : array-like
+        Sequence of returns or PnL values.
 
-    Returns
-    -------
-    float
-        Annualized performance measure.
+    frequency : str
+        Sampling frequency of the input series.
+
+    kind : {"simple", "log", "pnl"}, optional
+        Input type.
 
     Notes
     -----
-    - For kind="simple" and kind="log", the result is a percentage
-      return (CAGR).
-    - For kind="pnl", the result is expressed in monetary units and
-      should not be interpreted as a return.
-    - NaN values are treated as zero.
+    NaN values are treated as zeros.
+
+    Simple returns:
+
+    .. math::
+        \mathrm{CAGR}
+        = \left( \prod_{t=1}^{T} (1 + R_t) \right)^{1 / n_{\text{years}}} - 1
+
+    Log returns:
+
+    .. math::
+        \mathrm{CAGR}
+        = \exp\left(
+            \frac{1}{n_{\text{years}}}
+            \sum_{t=1}^{T} r_t
+        \right) - 1
+
+    PnL:
+
+    .. math::
+        \frac{1}{n_{\text{years}}}
+        \sum_{t=1}^{T} R_t
     """
+
     if kind not in {"simple", "log", "pnl"}:
         raise ValueError("`kind` must be one of {'simple', 'log', 'pnl'}.")
+    
+    if not isinstance(returns, (pd.Series, np.ndarray)):
+        values = np.asarray(returns)
+    else:
+        values = returns.copy()
 
-    values = returns.copy()
     values[np.isnan(values)] = 0.0
 
     n_years = len(values) / periods_per_year(frequency)
