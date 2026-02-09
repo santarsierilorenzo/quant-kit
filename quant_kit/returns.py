@@ -166,45 +166,6 @@ def annual_return(
     return float(np.sum(values) / n_years)
 
 
-def active_return(
-    returns: Iterable[float],
-    factor_returns: Iterable[float],
-) -> np.ndarray:
-    """
-    Compute active returns relative to a benchmark or factor.
-
-    Active returns are defined as the difference between portfolio
-    returns and benchmark (or factor) returns.
-
-    Parameters
-    ----------
-    returns
-        Time series of portfolio returns.
-    factor_returns
-        Time series of benchmark or factor returns. The two series
-        must be aligned in time and have the same length.
-
-    Returns
-    -------
-    numpy.ndarray
-        Array of active returns.
-
-    Raises
-    ------
-    ValueError
-        If the input series have different lengths.
-    """
-    ret_arr = np.asarray(list(returns), dtype=float)
-    fac_arr = np.asarray(list(factor_returns), dtype=float)
-
-    if ret_arr.shape[0] != fac_arr.shape[0]:
-        raise ValueError(
-            "returns and factor_returns must have the same length."
-        )
-
-    return ret_arr - fac_arr
-
-
 def aggregate_returns(
     returns: pd.Series,
     frequency: Frequency = "Y",
@@ -253,3 +214,42 @@ def aggregate_returns(
     return out.resample(rule).apply(
         lambda x: np.prod(1.0 + x) - 1.0
     )
+
+
+def _active_return(
+    returns: Iterable[float],
+    factor_returns: Iterable[float],
+) -> np.ndarray:
+    """
+    Compute active returns relative to a benchmark or factor.
+
+    Active returns are defined as the difference between portfolio
+    returns and benchmark (or factor) returns.
+
+    Parameters
+    ----------
+    returns
+        Time series of portfolio returns.
+    factor_returns
+        Time series of benchmark or factor returns. The two series
+        must be aligned in time and have the same length.
+
+    Returns
+    -------
+    numpy.ndarray
+        Array of active returns.
+
+    Raises
+    ------
+    ValueError
+        If the input series have different lengths.
+    """
+    ret_arr = np.asarray(list(returns), dtype=float)
+    fac_arr = np.asarray(list(factor_returns), dtype=float)
+
+    if ret_arr.shape[0] != fac_arr.shape[0]:
+        raise ValueError(
+            "returns and factor_returns must have the same length."
+        )
+
+    return ret_arr - fac_arr

@@ -4,7 +4,6 @@ from .returns import (
     cum_returns,
     annual_return,
     aggregate_returns,
-    active_return
 )
 
 from .risk import (

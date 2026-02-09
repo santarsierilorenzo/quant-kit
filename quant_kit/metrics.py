@@ -3,7 +3,7 @@ from __future__ import annotations
 from .risk import downside_risk, drawdown
 from .typing import ArrayLike, Frequency
 from .utils import periods_per_year
-from .returns import active_return
+from .returns import _active_return
 from typing import Iterable
 import pandas as pd
 import numpy as np
@@ -410,7 +410,7 @@ def tracking_error(
     float
         Sample standard deviation of active returns (ddof=1).
     """
-    ar = active_return(returns, factor_returns)
+    ar = _active_return(returns, factor_returns)
     return float(np.nanstd(ar, ddof=1))
 
 
@@ -447,7 +447,7 @@ def information_ratio(
     where r_t are the strategy returns and b_t are the benchmark or
     factor returns.
 
-    The function assumes that `active_return` returns the mean active
+    The function assumes that `_active_return` returns the mean active
     return and that `tracking_error` returns the standard deviation of
     active returns.
 
@@ -464,7 +464,7 @@ def information_ratio(
     if returns_arr.size < 2:
         return np.nan
 
-    ar = active_return(returns_arr, factor_arr)
+    ar = _active_return(returns_arr, factor_arr)
     te = tracking_error(returns_arr, factor_arr)
 
     if te == 0.0 or np.isnan(te):

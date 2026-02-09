@@ -10,4 +10,3 @@ Functions for computing and aggregating return series.
    quant_kit.returns.cum_returns
    quant_kit.returns.annual_return
    quant_kit.returns.aggregate_returns
-   quant_kit.returns.active_return
