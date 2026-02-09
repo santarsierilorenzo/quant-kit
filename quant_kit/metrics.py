@@ -51,12 +51,11 @@ def sharpe_ratio(
 
     .. math::
 
-        \widehat{\mathrm{Sharpe}} =
-        \frac{\overline{R_p - R_f}}{\operatorname{std}(R_p - R_f)}
+        \\text{Sharpe} = \\frac{\\overline{R_p - R_f}}{\\operatorname{std}(R_p - R_f)}
 
     where :math:`R_p` denotes portfolio returns and :math:`R_f` the risk-free
     rate.
-"""
+    """
 
     arr = np.asarray(list(returns), dtype=float)
     arr = arr[~np.isnan(arr)]
