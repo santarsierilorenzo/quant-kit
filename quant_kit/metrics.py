@@ -50,7 +50,7 @@ def sharpe_ratio(
     - Formula:
     .. math::
 
-        \widehat{\mathrm{Sharpe}} =
+        \text{Sharpe} =
         \frac{\overline{R_p - R_f}}{\operatorname{std}(R_p - R_f)}
 
     """
