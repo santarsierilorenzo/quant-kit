@@ -88,29 +88,55 @@ def annual_return(
     """
     Compute the annualized performance of a return or PnL series.
 
-    Simple and log returns are annualized using the CAGR.
-    PnL values are annualized using the arithmetic mean.
+    For simple and log returns, the function computes the CAGR
+    (Compounded Annual Growth Rate). For PnL values, it computes
+    the annualized arithmetic mean.
 
     Parameters
     ----------
     returns : array-like
-        Sequence of returns or PnL values.
+        Input sequence of returns or PnL values. The interpretation
+        depends on the ``kind`` parameter.
+
+        Typically a one-dimensional array-like object such as a
+        ``numpy.ndarray`` or ``pandas.Series``.
 
     frequency : str
-        Sampling frequency of the input series.
+        String describing the sampling frequency of the input series.
+        It is used to infer the number of years in the sample.
+
+        For example, for weekly data the number of years is computed
+        as ``n_obs / 52``.
 
     kind : {"simple", "log", "pnl"}, optional
-        Input type.
+        Type of input values.
+
+        - ``"simple"``: simple (decimal) returns, compounded
+        multiplicatively
+        - ``"log"``: log-returns, aggregated additively
+        - ``"pnl"``: additive profit-and-loss values
 
     Notes
     -----
-    NaN values are treated as zeros.
+    - NaN values are treated as zeros.
 
-    Simple returns:
+    - For Simple returns the formula is:
 
     .. math::
     
         \\text{CAGR} = \\left[ \\prod_{k=1}^{N} (1 + R_k) \\right]^{1 / \\text{years}} - 1
+
+    - For Log returns the formula is:
+
+    .. math::
+
+        \\text{CAGR} = \exp \left( \\frac{1}{\\text{years}} \sum_{k=1}^{N} r_k \\right) - 1
+
+    - For PnL the formula is:
+
+    .. math::
+
+        \\frac{1}{\\text{years}} \sum_{k=1}^{N} r_k
 
     """
 
