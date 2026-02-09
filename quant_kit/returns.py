@@ -110,19 +110,8 @@ def annual_return(
 
     .. math::
 
-        \text{CAGR} = [\prod_{t=1}^{T} (1 + R_t)]^{1 / n_{\text{years}}} - 1
+        CAGR = [\prod_{k=1}^{N} (1 + R_k)]^{1 / years} - 1
 
-    Log returns:
-
-    .. math::
-
-        \text{CAGR} = \exp [\frac{1}{n_{\text{years}}} \sum_{t=1}^{T} r_t] - 1
-
-    PnL:
-
-    .. math::
-    
-        \frac{1}{n_{\text{years}}} \sum_{t=1}^{T} R_t
 
     """
 
@@ -142,8 +131,8 @@ def annual_return(
         raise ValueError("Not enough data to annualize.")
 
     if kind == "simple":
-        total_return = np.prod(1.0 + values) - 1.0
-        return (1.0 + total_return) ** (1.0 / n_years) - 1.0
+        total_return = np.prod(1.0 + values)
+        return total_return ** (1.0 / n_years) - 1.0
 
     if kind == "log":
         return np.exp(np.sum(values) / n_years) - 1.0
