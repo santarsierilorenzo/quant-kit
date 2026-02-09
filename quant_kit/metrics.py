@@ -51,7 +51,7 @@ def sharpe_ratio(
 
     .. math::
 
-        \\text{Sharpe} = \\frac{\\overline{R_p - R_f}}{\\operatorname{std}(R_p - R_f)}
+        \\text{Sharpe Ratio} = \\frac{\\overline{R_p - R_f}}{\\operatorname{std}(R_p - R_f)}
 
     where :math:`R_p` denotes portfolio returns and :math:`R_f` the risk-free
     rate.
