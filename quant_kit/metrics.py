@@ -50,7 +50,7 @@ def sharpe_ratio(
     - Formula:
     .. math::
     
-        \\widehat{\\text{Sharpe Ratio}} = \\frac{\overline{R_p - R_f}}{\\text{std}(R_p - R_f)}
+        \\widehat{\\text{Sharpe Ratio}} = \\frac{\\overline{R_p - R_f}}{\\text{std}(R_p - R_f)}
 
     """
     arr = np.asarray(list(returns), dtype=float)
