@@ -109,23 +109,23 @@ def annual_return(
     Simple returns:
 
     .. math::
-        \mathrm{CAGR}
-        = \left( \prod_{t=1}^{T} (1 + R_t) \right)^{1 / n_{\text{years}}} - 1
+        \\mathrm{CAGR}
+        = \\left( \\prod_{t=1}^{T} (1 + R_t) \\right)^{1 / n_{\\text{years}}} - 1
 
     Log returns:
 
     .. math::
-        \mathrm{CAGR}
-        = \exp\left(
-            \frac{1}{n_{\text{years}}}
-            \sum_{t=1}^{T} r_t
-        \right) - 1
+        \\mathrm{CAGR}
+        = \\exp\\left(
+            \\frac{1}{n_{\\text{years}}}
+            \\sum_{t=1}^{T} r_t
+        \\right) - 1
 
     PnL:
 
     .. math::
-        \frac{1}{n_{\text{years}}}
-        \sum_{t=1}^{T} R_t
+        \\frac{1}{n_{\\text{years}}}
+        \\sum_{t=1}^{T} R_t
     """
 
     if kind not in {"simple", "log", "pnl"}:
