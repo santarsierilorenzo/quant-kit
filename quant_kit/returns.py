@@ -136,7 +136,7 @@ def annual_return(
 
     .. math::
 
-        \\frac{1}{\\text{years}} \sum_{k=1}^{N} r_k
+        \\frac{1}{\\text{years}} \sum_{k=1}^{N} \\text{PnL}_k
 
     """
 
