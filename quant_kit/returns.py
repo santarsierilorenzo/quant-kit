@@ -110,7 +110,7 @@ def annual_return(
 
     .. math::
     
-        \text{CAGR} = \left[ \prod_{k=1}^{N} (1 + R_k) \right]^{1 / \text{years}} - 1
+        \\text{CAGR} = \\left[ \\prod_{k=1}^{N} (1 + R_k) \\right]^{1 / \\text{years}} - 1
 
     """
 
