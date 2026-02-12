@@ -60,6 +60,7 @@ def sharpe_ratio(
             \operatorname{std}(R_{p,t} - R_f)
         }
 
+        
     where :math:`R_p` denotes portfolio returns and :math:`R_f` the risk-free
     rate.    
     """
@@ -129,6 +130,7 @@ def sortino_ratio(
 
     .. math::
 
+    
         \text{Sortino Ratio} =
         \sqrt{N}
         \frac{
