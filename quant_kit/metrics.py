@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from .custom_typing import ArrayLike, Frequency
-from .risk import downside_risk, drawdown
+from .returns import _active_return, annual_return
+from .risk import downside_risk, max_drawdown
 from .utils import periods_per_year
-from .returns import _active_return
 from typing import Iterable
 import pandas as pd
 import numpy as np
@@ -168,18 +168,69 @@ def calmar_ratio(
     kind: str = "simple",
 ) -> float:
     """
-    Compute the Calmar ratio or a Calmar-like metric.
+    Compute the Calmar ratio.
+
+    Parameters
+    ----------
+    returns : ArrayLike
+        Input time series:
+
+        - ``kind="simple"``: simple returns
+        - ``kind="log"``: log-returns
+        - ``kind="pnl"``: additive PnL
+
+    frequency : Frequency
+        Sampling frequency of the input series:
+
+        - ``"D"``: daily
+        - ``"W"``: weekly
+        - ``"M"``: monthly
+        - ``"Y"``: yearly
+
+    kind : str, default="simple"
+        Type of input values.
+
+    Returns
+    -------
+    float
+        Calmar ratio.
+
+    Notes
+    -----
+    The Calmar ratio is defined as:
+
+    .. math::
+
+        \\text{Calmar} =
+        \\frac{\\mathrm{CAGR}}{\\left| \\mathrm{MaxDrawdown} \\right|}
+
+    where:
+
+    - :math:`\\mathrm{CAGR}` is the compound annual growth rate.
+    - :math:`\\mathrm{MaxDrawdown}` is the maximum peak-to-trough drawdown
+      over the sample period.
+
+    If ``kind="pnl"``, a Calmar-like metric is computed:
+
+    .. math::
+
+        \\frac{\\text{Average Annual Return}}
+        {\\left| \\text{Monetary Max Drawdown} \\right|}
+
+    In this case the numerator is the annualized mean PnL and the
+    denominator is the absolute monetary maximum drawdown.
     """
-    max_dd = abs(np.min(drawdown(returns, kind=kind)))
+    max_dd = max_drawdown(
+        returns,
+        kind=kind,
+    )
+
     if max_dd == 0:
-        return np.nan
+        return np.nans
 
-    n_years = len(list(returns)) / periods_per_year(frequency)
-    if n_years <= 0:
-        return np.nan
-
-    total = np.sum(returns)
-    return (total / n_years) / max_dd
+    ann_ret = annual_return(returns, frequency=frequency, kind=kind)
+    
+    return ann_ret / np.abs(max_dd)
 
 
 def omega_ratio(
