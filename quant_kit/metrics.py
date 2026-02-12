@@ -51,13 +51,12 @@ def sharpe_ratio(
 
     .. math::
 
-    
-        \text{Sharpe Ratio} =
-        \sqrt{N}
-        \frac{
-            \operatorname{mean}(R_{p,t} - R_f)
+        \\text{Sharpe Ratio} =
+        \\sqrt{N}
+        \\frac{
+            \\operatorname{mean}(R_{p,t} - R_f)
         }{
-            \operatorname{std}(R_{p,t} - R_f)
+            \\operatorname{std}(R_{p,t} - R_f)
         }
 
         
@@ -130,17 +129,16 @@ def sortino_ratio(
 
     .. math::
 
-    
-        \text{Sortino Ratio} =
-        \sqrt{N}
-        \frac{
-            \operatorname{mean}(R_{p,t} - MAR)
+        \\text{Sortino Ratio} =
+        \\sqrt{N}
+        \\frac{
+            \\operatorname{mean}(R_{p,t} - MAR)
         }{
-            \operatorname{std}(
-                \min(R_{p,t} - MAR, 0)
+            \\operatorname{std}(
+                \\min(R_{p,t} - MAR, 0)
             )
         }
-
+  
     where r_t are the periodic returns.
 
     NaN values are ignored. The result is annualized using the
