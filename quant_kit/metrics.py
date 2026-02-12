@@ -130,12 +130,16 @@ def sortino_ratio(
     .. math::
 
     
-        \\text{Sortino Ratio} =
-        \\frac{
-            \\overline{R_p - MAR}
-        }{
-            \\sigma_D
-        }
+      \\text{Sortino Ratio} =
+      \\frac{
+          \\overline{R_{p,t} - MAR}
+      }{
+          \\sqrt{
+              \\overline{
+                  \\min(R_{p,t} - MAR, 0)^2
+              }
+          }
+      }
 
     where r_t are the periodic returns.
 
