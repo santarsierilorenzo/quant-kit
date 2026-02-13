@@ -82,22 +82,15 @@
    :gutter: 2
 
    .. grid-item-card:: 📊 Performance Metrics
-      :link: api/returns.html
+      :link: api/metrics.html
 
-      Portfolio and strategy performance metrics such as cumulative returns,
-      Sharpe ratio, drawdowns, volatility, and related statistics.
+      Portfolio and strategy performance metrics such as calmar ratio,
+      Sortino Ratio, Omega Ratio, Sharpe ratio, Information Ratio
 
    .. grid-item-card:: ⚠️ Risk Analysis
       :link: api/risk.html
 
-      Downside and tail-risk measures, including value-at-risk,
-      expected shortfall, and stress-oriented indicators.
-
-   .. grid-item-card:: 🧪 Research Tools
-      :link: api/research.html
-
-      Utilities designed for quantitative research workflows, including
-      factor analysis helpers and strategy evaluation tools.
+      Risk measures such as downside risk, tail-risk, DrawDown Statistics.
 
 .. toctree::
    :hidden:
