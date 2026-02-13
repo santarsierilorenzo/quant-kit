@@ -3,7 +3,7 @@ from __future__ import annotations
 from .custom_typing import ArrayLike, Frequency
 from .returns import _active_return, annual_return
 from .risk import downside_risk, max_drawdown
-from .utils import periods_per_year
+from .utils import periods_per_year, _PANDAS_RULE
 from typing import Iterable
 import pandas as pd
 import numpy as np
@@ -202,7 +202,7 @@ def calmar_ratio(
     .. math::
 
         \\text{Calmar} =
-        \\frac{\\mathrm{CAGR}}{\\left| \\mathrm{MaxDrawdown} \\right|}
+        \\frac{\\mathrm{CAGR}}{\\left| \\mathrm{Max Drawdown} \\right|}
 
     where:
 
@@ -226,7 +226,7 @@ def calmar_ratio(
     )
 
     if max_dd == 0:
-        return np.nans
+        return np.nan
 
     ann_ret = annual_return(returns, frequency=frequency, kind=kind)
     
@@ -269,21 +269,34 @@ def omega_ratio(
     -----
     The Omega ratio is defined as:
 
-        Omega(tau) =
-            sum( max(r_t - tau, 0) ) /
-            sum( max(tau - r_t, 0) )
+    .. math::
 
-    where r_t are the periodic returns and tau is the required return
-    converted to the same frequency as `returns`.
+        \\Omega(\\tau) =
+        \\frac{
+            \\sum_{t=1}^T \\max(r_t - \\tau, 0)
+        }{
+            \\sum_{t=1}^T \\max(\\tau - r_t, 0)
+        }
 
-    The annual required return is converted as:
+    where :math:`r_t` are the periodic returns and :math:`\\tau` is the
+    required return expressed at the same frequency as the input series.
 
-        tau = (1 + required_return) ** (1 / N) - 1
+    The annual required return :math:`R_{\\text{req}}` is converted to
+    periodic frequency as:
 
-    where N is the number of periods per year implied by `frequency`.
+    .. math::
 
-    NaN values are ignored. If no downside deviations are present,
-    the Omega ratio is undefined and NaN is returned.
+        \\tau =
+        \\begin{cases}
+            R_{\\text{req}}, & N = 1 \\\\
+            (1 + R_{\\text{req}})^{1 / N} - 1, & N > 1
+        \\end{cases}
+
+    where :math:`N` is the number of periods per year implied by
+    ``frequency``.
+
+    NaN values are ignored. If the denominator is zero (no downside
+    deviations), the Omega ratio is undefined.
     """
     arr = np.asarray(list(returns), dtype=float)
     arr = arr[~np.isnan(arr)]
@@ -291,7 +304,7 @@ def omega_ratio(
     if arr.size < 2:
         return np.nan
 
-    if required_return <= -1.0:
+    if required_return < 0:
         return np.nan
 
     periods = periods_per_year(frequency)
@@ -318,9 +331,9 @@ def hit_rate(
     returns: Iterable[float],
 ) -> float:
     """
-    Compute the hit ratio.
+    Compute the hit rate.
 
-    The hit ratio is defined as the fraction of periods with strictly
+    The hit rate is defined as the fraction of periods with strictly
     positive returns.
 
     Parameters
@@ -331,19 +344,24 @@ def hit_rate(
     Returns
     -------
     float
-        Hit ratio, i.e. the proportion of observations where the
+        Hit rate, i.e. the proportion of observations where the
         return (or PnL) is greater than zero.
 
     Notes
     -----
+    The hit rate is defined as:
+
+    .. math::
+
+        \\text{Hit Rate} =
+        \\frac{1}{T}
+        \\sum_{t=1}^T
+        \\mathbb{I}(r_t > 0)
+
+    where :math:`\\mathbb{I}(\\cdot)` is the indicator function and
+    :math:`r_t` are the periodic returns or PnL values.
+
     NaN values are ignored.
-
-    A hit ratio close to 0.5 indicates that positive and negative
-    outcomes occur with similar frequency, while higher values
-    indicate a larger proportion of positive periods.
-
-    This metric does not take into account the magnitude of returns,
-    only their sign.
     """
     arr = np.asarray(list(returns), dtype=float)
     arr = arr[~np.isnan(arr)]
@@ -351,7 +369,7 @@ def hit_rate(
     if arr.size == 0:
         return np.nan
 
-    return float(np.mean(arr > 0.0))
+    return float(np.mean(arr > 0))
 
 
 def period_hit_rate(
@@ -359,10 +377,10 @@ def period_hit_rate(
     frequency: Frequency,
 ) -> pd.Series:
     """
-    Compute the hit ratio on aggregated periods.
+    Compute the hit rate on aggregated periods.
 
     The function aggregates returns at the specified frequency and
-    computes the hit ratio for each aggregated period. A period is
+    computes the hit rate for each aggregated period. A period is
     considered a "hit" if the aggregated return is strictly positive.
 
     Parameters
@@ -379,7 +397,7 @@ def period_hit_rate(
     Returns
     -------
     pandas.Series
-        Time series of hit ratios computed on aggregated periods.
+        Time series of hit rate computed on aggregated periods.
         Each value represents the fraction of positive observations
         within the corresponding period.
     """
@@ -387,6 +405,7 @@ def period_hit_rate(
         raise TypeError("`returns` must be a pandas Series.")
 
     rule = _PANDAS_RULE.get(frequency)
+
     if rule is None:
         raise ValueError(f"Unsupported frequency: {frequency}")
 
@@ -417,13 +436,20 @@ def skew(
     -----
     Skewness is defined as:
 
-        E[ ((X - mu) / sigma)^3 ]
+    .. math::
 
-    where mu is the sample mean and sigma is the sample standard
-    deviation computed with ddof=1.
+        \\text{Skew} =
+        \\mathbb{E}
+        \\left[
+            \\left(
+                \\frac{X - \\mu}{\\sigma}
+            \\right)^3
+        \\right]
 
-    NaN values are ignored. The estimator does not apply a finite-sample
-    bias correction.
+    where :math:`\\mu` is the sample mean and :math:`\\sigma` is the
+    sample standard deviation computed with ``ddof=1``.
+
+    NaN values are ignored. No finite-sample bias correction is applied.
     """
     arr = np.asarray(list(returns), dtype=float)
     arr = arr[~np.isnan(arr)]
@@ -458,13 +484,23 @@ def excess_kurtosis(
     -----
     Excess kurtosis is defined as:
 
-        E[ ((X - mu) / sigma)^4 ] - 3
+    .. math::
 
-    where mu is the sample mean and sigma is the sample standard
-    deviation computed with ddof=1.
+        \\text{Excess Kurtosis} =
+        \\mathbb{E}
+        \\left[
+            \\left(
+                \\frac{X - \\mu}{\\sigma}
+            \\right)^4
+        \\right]
+        - 3
 
-    NaN values are ignored. The estimator does not apply a finite-sample
-    bias correction.
+    where :math:`\\mu` is the sample mean and :math:`\\sigma` is the
+    sample standard deviation computed with ``ddof=1``.
+
+    A normal distribution has zero excess kurtosis.
+
+    NaN values are ignored. No finite-sample bias correction is applied.
     """
     arr = np.asarray(list(returns), dtype=float)
     arr = arr[~np.isnan(arr)]
@@ -495,6 +531,28 @@ def tracking_error(
     -------
     float
         Sample standard deviation of active returns (ddof=1).
+
+    Notes
+    -----
+    Tracking error is defined as the sample standard deviation of
+    active returns:
+
+    .. math::
+
+        \\text{TE} =
+        \\sqrt{
+            \\frac{1}{T - 1}
+            \\sum_{t=1}^T
+            \\left(
+                (r_t - b_t) - \\overline{r - b}
+            \\right)^2
+        }
+
+    where :math:`r_t` are the portfolio returns,
+    :math:`b_t` are the benchmark or factor returns, and
+    :math:`\\overline{r - b}` is the mean active return.
+
+    NaN values are ignored.
     """
     ar = _active_return(returns, factor_returns)
     return float(np.nanstd(ar, ddof=1))
@@ -528,17 +586,21 @@ def information_ratio(
     -----
     The Information Ratio is defined as:
 
-        IR = mean(r_t - b_t) / std(r_t - b_t)
+    .. math::
 
-    where r_t are the strategy returns and b_t are the benchmark or
-    factor returns.
+        \\text{IR} =
+        \\frac{
+            \\mathbb{E}[r_t - b_t]
+        }{
+            \\text{TE}
+        }
 
-    The function assumes that `_active_return` returns the mean active
-    return and that `tracking_error` returns the standard deviation of
-    active returns.
+    where :math:`r_t` are the strategy returns, :math:`b_t` are the
+    benchmark or factor returns, and :math:`\\text{TE}` is the tracking
+    error, defined as the sample standard deviation of active returns.
 
     If the tracking error is zero or undefined, the Information Ratio
-    is undefined and NaN is returned.
+    is undefined.
     """
     returns_arr = np.asarray(list(returns), dtype=float)
     factor_arr = np.asarray(list(factor_returns), dtype=float)
