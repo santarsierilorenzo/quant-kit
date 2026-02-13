@@ -1,5 +1,5 @@
 
-Quant-Kit
+quant-kit
 =============
 
 <p align="center">
