@@ -205,7 +205,7 @@ def aggregate_returns(
     if kind in {"pnl", "log"}:
         return out.resample(rule).sum()
 
-    # simple returns: compound within each period
+    # Simple returns: compound within each period
     return out.resample(rule).apply(
         lambda x: np.prod(1.0 + x) - 1.0
     )
