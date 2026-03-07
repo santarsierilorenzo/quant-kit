@@ -1,6 +1,8 @@
 from typing import Optional, Dict, Any, List, Iterable
 from dataclasses import dataclass, field
 from statsmodels.stats import diagnostic
+from .custom_typing import ArrayLike
+from scipy.stats import norm
 import numpy as np
 
 
@@ -31,8 +33,123 @@ class AutocorrelationTest:
     info: Dict[str, Any] = field(default_factory=dict)
 
 
+import numpy as np
+from numpy.typing import ArrayLike
+
+
+def acf(
+    values: ArrayLike,
+    lags: int | None = None
+) -> np.ndarray:
+    """
+    Compute sample autocorrelation function.
+
+    Parameters
+    ----------
+    values : ArrayLike
+        Input time series.
+    lags : int | None
+        Maximum lag. If None, uses floor(log(n)).
+
+    Returns
+    -------
+    np.ndarray
+        Autocorrelations from lag 0 to lag `lags`.
+    """
+
+    obs: np.ndarray = np.asarray(values, dtype=float)
+    n: int = len(obs)
+
+    if lags is None:
+        lags = int(np.log(n))
+
+    mu: float = float(np.mean(obs))
+    denom: float = float(np.sum((obs - mu) ** 2))
+
+    rhos: np.ndarray = np.empty(lags + 1)
+
+    rhos[0] = 1.0
+
+    for lag in range(1, lags + 1):
+        x_t = obs[lag:]
+        x_lag = obs[:-lag]
+
+        num: float = float(np.sum((x_t - mu) * (x_lag - mu)))
+        rhos[lag] = num / denom
+
+    return rhos
+
+
+def bartlett(
+    values: ArrayLike,
+    lag: int,
+    epsilon: float = 0.05
+) -> AutocorrelationTest:
+    """
+    Bartlett test for autocorrelation at a specific lag.
+
+    The test evaluates the null hypothesis that the autocorrelation at a
+    given lag is equal to zero.
+
+        H0: rho_k = 0
+        H1: rho_k != 0
+
+    The variance of the sample autocorrelation is estimated using
+    Bartlett's formula:
+
+        Var(rho_k) ≈ (1 + 2 * sum_{j=1}^{k-1} rho_j^2) / n
+
+    The resulting Z-statistic is asymptotically standard normal.
+
+    Parameters
+    ----------
+    values : ArrayLike
+        Time series observations.
+    lag : int
+        Lag at which the autocorrelation is tested.
+    epsilon : float, default 0.05
+        Significance level used for the rejection decision.
+
+    Returns
+    -------
+    AutocorrelationTest
+        Structured container with the estimated autocorrelation,
+        test statistic, p-value, and rejection decision.
+    """
+
+    obs: np.ndarray = np.asarray(values, dtype=float)
+    n: int = len(obs)
+
+    if lag < 1 or lag >= n:
+        raise ValueError("Lag must be between 1 and n - 1.")
+
+    rhos: np.ndarray = acf(obs, lags=lag)
+    rho_hat: float = float(rhos[lag])
+
+    if lag == 1:
+        var_hat: float = 1.0 / n
+    else:
+        sum_sq: float = float(np.sum(rhos[1:lag] ** 2))
+        var_hat = (1.0 + 2.0 * sum_sq) / n
+
+    z_stat: float = rho_hat / np.sqrt(var_hat)
+    p_value: float = 2.0 * (1.0 - norm.cdf(abs(z_stat)))
+
+    return AutocorrelationTest(
+        test_name="bartlett",
+        statistic=z_stat,
+        p_value=p_value,
+        reject=bool(p_value <= epsilon),
+        info={
+            "lag": lag,
+            "n_obs": n,
+            "rho_hat": rho_hat
+        }
+    )
+
+
 def ljung_box(
-    values: Iterable[float],
+    values: ArrayLike,
     lags: int | None = None,
     boxpierce: bool = False,
     model_df: int = 0,
