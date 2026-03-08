@@ -1,4 +1,6 @@
-from typing import Optional, Dict, Any, List, Iterable
+from __future__ import annotations
+
+from typing import Optional, Dict, Any, List
 from dataclasses import dataclass, field
 from statsmodels.stats import diagnostic
 from .custom_typing import ArrayLike
@@ -162,7 +164,7 @@ def ljung_box(
 
     Parameters
     ----------
-    values : Iterable[float]
+    values : ArrayLike
         Time series observations.
     lags : int | None, default None
         Number of lags included in the test. If None, a default value
