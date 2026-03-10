@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from typing import Callable, Iterable, Literal
-from datetime import date, datetime
+from datetime import datetime
 
 import pandas as pd
 import numpy as np
@@ -45,7 +45,6 @@ def ascii_report(
     mar: float = 0.0,
     required_return: float = 0.0,
     currency: str = "$",
-    as_of: str | date | datetime | None = None,
     width: int = 66,
 ) -> PortfolioReport:
     """
@@ -75,9 +74,6 @@ def ascii_report(
         Annual required return used for the Omega ratio.
     currency
         Currency symbol used when formatting PnL-based absolute metrics.
-    as_of
-        Report date shown in the header. If omitted and ``returns`` is a
-        pandas Series with a DatetimeIndex, the last timestamp is used.
     width
         Total line width for the rendered report.
 
@@ -103,7 +99,7 @@ def ascii_report(
         raise ValueError("`width` must be at least 40.")
 
     annualization = periods_per_year(frequency)
-    header_date = _resolve_as_of(returns, as_of)
+    header_date = datetime.today().strftime("%Y-%m-%d")
     is_pnl = kind == "pnl"
 
     format_magnitude = _make_magnitude_formatter(
@@ -350,26 +346,6 @@ def _to_numpy(values: ArrayLike) -> np.ndarray:
 
     arr = np.ravel(arr)
     return arr[~np.isnan(arr)]
-
-
-def _resolve_as_of(
-    returns: ArrayLike,
-    as_of: str | date | datetime | None,
-) -> str:
-    """Resolve the report date."""
-    if as_of is not None:
-        if isinstance(as_of, (date, datetime)):
-            return as_of.strftime("%Y-%m-%d")
-        return str(as_of)
-
-    if (
-        isinstance(returns, pd.Series)
-        and isinstance(returns.index, pd.DatetimeIndex)
-        and len(returns.index) > 0
-    ):
-        return returns.index[-1].strftime("%Y-%m-%d")
-
-    return "N/A"
 
 
 def _total_return(

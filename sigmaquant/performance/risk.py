@@ -197,26 +197,36 @@ def annual_vola(
 
 def downside_risk(
     returns: ArrayLike,
+    frequency: Frequency,
     m: float = 0.0,
+    annualize: bool = True,
 ) -> float:
     """
     Compute downside risk (semi-deviation).
 
     Downside risk is defined as the square root of the mean squared
     negative deviations of returns below a threshold level `m`.
+    Optionally, the estimator can be annualized using the square-root-
+    of-time rule.
 
     Parameters
     ----------
     returns
         Time series of periodic returns.
+    frequency
+        Frequency of the input data.
     m
         Threshold return. Only deviations below this level contribute
         to the downside risk.
+    annualize
+        If True, scale the semi-deviation to annual frequency using
+        the square-root-of-time rule implied by ``frequency``.
 
     Returns
     -------
     float
-        Downside risk (semi-deviation).
+        Downside risk (semi-deviation). If ``annualize=True`` the
+        value is scaled to annual frequency.
 
     Notes
     -----
@@ -235,6 +245,16 @@ def downside_risk(
             \\sum_{t=1}^{T}
             \\min(r_t - m, 0)^2
         }
+
+    If ``annualize=True`` the estimator is scaled as:
+
+    .. math::
+
+        s_{d,ann} =
+        s_d \\sqrt{N}
+
+    where :math:`N` is the number of periods per year implied by
+    ``frequency``.
     """
     arr = np.asarray(list(returns), dtype=float)
     arr = arr[~np.isnan(arr)]
@@ -243,32 +263,45 @@ def downside_risk(
         return np.nan
 
     downside = np.minimum(arr - m, 0.0)
-    return float(np.sqrt(np.mean(downside ** 2)))
+    scale = periods_per_year(frequency) if annualize else 1
+
+    return float(
+        np.sqrt(np.mean(downside ** 2))
+    ) * np.sqrt(scale)
 
 
 def upside_risk(
     returns: ArrayLike,
+    frequency: Frequency,
     m: float = 0.0,
+    annualize: bool = True
 ) -> float:
     """
     Compute upside risk (upside semi-deviation).
 
     Upside risk is defined as the square root of the mean squared
     positive deviations of returns above a threshold level `m`.
+    Optionally, the estimator can be annualized using the square-root-
+    of-time rule.
 
     Parameters
     ----------
     returns
         Time series of periodic returns.
+    frequency
+        Frequency of the input data.
     m
         Threshold return. Only deviations above this level contribute
         to the upside risk.
+    annualize
+        If True, scale the semi-deviation to annual frequency using
+        the square-root-of-time rule implied by ``frequency``.
 
     Returns
     -------
     float
-        Upside risk (upside semi-deviation).
-
+        Upside risk (upside semi-deviation). If ``annualize=True`` the
+        value is scaled to annual frequency.
 
     Notes
     -----
@@ -288,6 +321,16 @@ def upside_risk(
             \\sum_{t=1}^{T}
             \\max(r_t - m, 0)^2
         }
+
+    If ``annualize=True`` the estimator is scaled as:
+
+    .. math::
+
+        s_{u,ann} =
+        s_u \\sqrt{N}
+
+    where :math:`N` is the number of periods per year implied by
+    ``frequency``.
     """
     arr = np.asarray(list(returns), dtype=float)
     arr = arr[~np.isnan(arr)]
@@ -296,7 +339,11 @@ def upside_risk(
         return np.nan
 
     upside = np.maximum(arr - m, 0.0)
-    return float(np.sqrt(np.mean(upside ** 2)))
+    scale = periods_per_year(frequency) if annualize else 1
+
+    return float(
+        np.sqrt(np.mean(upside ** 2))
+    ) * np.sqrt(scale)
 
 
 def time_underwater(
