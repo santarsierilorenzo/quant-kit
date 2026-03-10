@@ -49,38 +49,6 @@ def ascii_report(
 ) -> PortfolioReport:
     """
     Build a structured portfolio report with ASCII rendering support.
-
-    Parameters
-    ----------
-    returns
-        Strategy return or PnL series.
-    frequency
-        Sampling frequency of the input series.
-    strategy_name
-        Label shown in the report header.
-    benchmark_returns
-        Optional benchmark or factor series. When provided, tracking error
-        and information ratio are included.
-    kind
-        Type of the input series. Supported values are ``simple``, ``log``,
-        and ``pnl``.
-    starting_value
-        Starting value passed to cumulative and drawdown computations.
-    risk_free
-        Per-period risk-free rate used for the Sharpe ratio.
-    mar
-        Minimum acceptable return used for the Sortino ratio.
-    required_return
-        Annual required return used for the Omega ratio.
-    currency
-        Currency symbol used when formatting PnL-based absolute metrics.
-    width
-        Total line width for the rendered report.
-
-    Returns
-    -------
-    PortfolioReport
-        Structured report object with ASCII rendering helpers.
     """
     values = _to_numpy(returns)
     if values.size == 0:
@@ -108,22 +76,33 @@ def ascii_report(
     )
     magnitude_unit = "currency" if is_pnl else "percent"
 
+    # --- Return metrics
     total_return_value = _total_return(
         returns=returns,
         kind=kind,
         starting_value=starting_value,
     )
+
     annual_return_value = _annualized_total(
         returns=returns,
         frequency=frequency,
         kind=kind,
     )
 
+    # --- Risk metrics
+    vola = annual_vola(values, frequency)
+    d_risk = downside_risk(values, frequency)
+    u_risk = upside_risk(values, frequency)
+    skew_value = skew(values)
+    kurt_value = excess_kurtosis(values)
+
+    # --- Drawdown metrics
     dd_stats = drawdown_stats(
         returns,
         kind=kind,
         starting_value=starting_value,
     )
+
     max_dd_value = max_drawdown(
         returns,
         kind=kind,
@@ -133,6 +112,35 @@ def ascii_report(
     avg_dd_value = _safe_get_float(dd_stats, "Avg Drawdown")
     max_tuw_value = _safe_get_float(dd_stats, "Max Time Underwater")
     avg_tuw_value = _safe_get_float(dd_stats, "Avg Time Underwater")
+
+    # --- Risk-adjusted
+    sharpe_value = sharpe_ratio(
+        values,
+        frequency,
+        risk_free=risk_free,
+    )
+
+    sortino_value = sortino_ratio(
+        values,
+        frequency,
+        mar=mar,
+    )
+
+    calmar_value = calmar_ratio(
+        values,
+        frequency,
+        kind=kind,
+    )
+
+    omega_value = omega_ratio(
+        values,
+        required_return,
+        frequency,
+    )
+
+    # --- Distribution
+    hit_rate_value = hit_rate(values)
+    tail_ratio_value = tail_ratio(values)
 
     sections: list[Section] = [
         Section(
@@ -157,32 +165,32 @@ def ascii_report(
             metrics=[
                 Metric(
                     name="Annualized Volatility",
-                    value=format_magnitude(annual_vola(values, frequency)),
-                    raw_value=annual_vola(values, frequency),
+                    value=format_magnitude(vola),
+                    raw_value=vola,
                     unit=magnitude_unit,
                 ),
                 Metric(
                     name="Downside Risk",
-                    value=format_magnitude(downside_risk(values)),
-                    raw_value=downside_risk(values),
+                    value=format_magnitude(d_risk),
+                    raw_value=d_risk,
                     unit=magnitude_unit,
                 ),
                 Metric(
                     name="Upside Risk",
-                    value=format_magnitude(upside_risk(values)),
-                    raw_value=upside_risk(values),
+                    value=format_magnitude(u_risk),
+                    raw_value=u_risk,
                     unit=magnitude_unit,
                 ),
                 Metric(
                     name="Skewness",
-                    value=_format_float(skew(values)),
-                    raw_value=skew(values),
+                    value=_format_float(skew_value),
+                    raw_value=skew_value,
                     unit="float",
                 ),
                 Metric(
                     name="Excess Kurtosis",
-                    value=_format_float(excess_kurtosis(values)),
-                    raw_value=excess_kurtosis(values),
+                    value=_format_float(kurt_value),
+                    raw_value=kurt_value,
                     unit="float",
                 ),
             ],
@@ -192,66 +200,26 @@ def ascii_report(
             metrics=[
                 Metric(
                     name="Sharpe Ratio",
-                    value=_format_float(
-                        sharpe_ratio(
-                            values,
-                            frequency,
-                            risk_free=risk_free,
-                        )
-                    ),
-                    raw_value=sharpe_ratio(
-                        values,
-                        frequency,
-                        risk_free=risk_free,
-                    ),
+                    value=_format_float(sharpe_value),
+                    raw_value=sharpe_value,
                     unit="float",
                 ),
                 Metric(
                     name="Sortino Ratio",
-                    value=_format_float(
-                        sortino_ratio(
-                            values,
-                            frequency,
-                            mar=mar,
-                        )
-                    ),
-                    raw_value=sortino_ratio(
-                        values,
-                        frequency,
-                        mar=mar,
-                    ),
+                    value=_format_float(sortino_value),
+                    raw_value=sortino_value,
                     unit="float",
                 ),
                 Metric(
                     name="Calmar Ratio",
-                    value=_format_float(
-                        calmar_ratio(
-                            values,
-                            frequency,
-                            kind=kind,
-                        )
-                    ),
-                    raw_value=calmar_ratio(
-                        values,
-                        frequency,
-                        kind=kind,
-                    ),
+                    value=_format_float(calmar_value),
+                    raw_value=calmar_value,
                     unit="float",
                 ),
                 Metric(
                     name="Omega Ratio",
-                    value=_format_float(
-                        omega_ratio(
-                            values,
-                            required_return,
-                            frequency,
-                        )
-                    ),
-                    raw_value=omega_ratio(
-                        values,
-                        required_return,
-                        frequency,
-                    ),
+                    value=_format_float(omega_value),
+                    raw_value=omega_value,
                     unit="float",
                 ),
             ],
@@ -290,14 +258,14 @@ def ascii_report(
             metrics=[
                 Metric(
                     name="Hit Rate",
-                    value=_format_percent(hit_rate(values)),
-                    raw_value=hit_rate(values),
+                    value=_format_percent(hit_rate_value),
+                    raw_value=hit_rate_value,
                     unit="percent",
                 ),
                 Metric(
                     name="Tail Ratio",
-                    value=_format_float(tail_ratio(values)),
-                    raw_value=tail_ratio(values),
+                    value=_format_float(tail_ratio_value),
+                    raw_value=tail_ratio_value,
                     unit="float",
                 ),
             ],
@@ -305,22 +273,21 @@ def ascii_report(
     ]
 
     if benchmark is not None:
-        tracking_error_value = tracking_error(values, benchmark)
-        information_ratio_value = information_ratio(values, benchmark)
+        te = tracking_error(values, benchmark)
+        ir = information_ratio(values, benchmark)
 
-        risk_adjusted_section = sections[2]
-        risk_adjusted_section.metrics.extend(
+        sections[2].metrics.extend(
             [
                 Metric(
                     name="Tracking Error",
-                    value=format_magnitude(tracking_error_value),
-                    raw_value=tracking_error_value,
+                    value=format_magnitude(te),
+                    raw_value=te,
                     unit=magnitude_unit,
                 ),
                 Metric(
                     name="Information Ratio",
-                    value=_format_float(information_ratio_value),
-                    raw_value=information_ratio_value,
+                    value=_format_float(ir),
+                    raw_value=ir,
                     unit="float",
                 ),
             ]
@@ -339,11 +306,7 @@ def ascii_report(
 
 def _to_numpy(values: ArrayLike) -> np.ndarray:
     """Convert an array-like object to a 1D float NumPy array."""
-    if isinstance(values, np.ndarray):
-        arr = np.asarray(values, dtype=float)
-    else:
-        arr = np.asarray(list(values), dtype=float)
-
+    arr = np.asarray(values, dtype=float)
     arr = np.ravel(arr)
     return arr[~np.isnan(arr)]
 
@@ -359,6 +322,7 @@ def _total_return(
         kind=kind,
         starting_value=starting_value,
     )
+
     cumulative_array = np.asarray(cumulative, dtype=float)
 
     if cumulative_array.size == 0:
@@ -374,9 +338,6 @@ def _annualized_total(
 ) -> float:
     """
     Compute annualized return or annualized PnL.
-
-    For ``simple`` and ``log`` inputs this returns an annualized return.
-    For ``pnl`` inputs this returns average annualized PnL.
     """
     values = _to_numpy(returns)
     if values.size == 0:
@@ -395,7 +356,7 @@ def _make_magnitude_formatter(
     is_pnl: bool,
     currency: str,
 ) -> Callable[[float], str]:
-    """Create a formatter for percent- or currency-like magnitudes."""
+    """Create a formatter for percent or currency magnitudes."""
     if is_pnl:
         return lambda value: _format_currency(value, currency)
 
@@ -430,7 +391,7 @@ def _format_percent(value: float) -> str:
 
 
 def _format_currency(value: float, currency: str) -> str:
-    """Format a float as currency with the symbol on the right."""
+    """Format a float as currency."""
     if np.isnan(value):
         return "n/a"
 
@@ -456,3 +417,4 @@ def _format_periods(value: float | int) -> str:
         return f"{int(value_float)} periods"
 
     return f"{value_float:.2f} periods"
+    
