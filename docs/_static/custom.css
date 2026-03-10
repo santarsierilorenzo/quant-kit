@@ -1,0 +1,181 @@
+/* =========================================================
+   GLOBAL WIDTH (Breeze-compatible)
+========================================================= */
+
+.bd-main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   HEADER / NAVBAR LOGO (Breeze)
+========================================================= */
+
+.bz-header-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.bz-header-brand img {
+    height: 44px;
+    width: auto;
+}
+
+.bz-header-brand span {
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+/* =========================================================
+   HERO WRAPPER
+========================================================= */
+
+.hero-wrapper {
+    margin-top: 1rem;
+}
+
+.hero {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   HERO TEXT
+========================================================= */
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 500;
+    margin: 0 0 1rem 0;
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-foreground-muted);
+    margin-bottom: 1.25rem;
+}
+
+.hero-content p {
+    margin-bottom: 1.1rem;
+}
+
+/* =========================================================
+   HERO RIGHT LOGO (Breeze-style)
+========================================================= */
+
+.hero-logo-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 8.5rem;
+    width: auto;
+    opacity: 0.95;
+}
+
+@media (max-width: 768px) {
+    .hero-logo-right {
+        display: none;
+    }
+}
+
+/* =========================================================
+   CTA BUTTONS
+========================================================= */
+
+.cta-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.75rem;
+    flex-wrap: wrap;
+}
+
+.cta-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    padding: 0.75rem 1.3rem;
+    border-radius: 999px;
+
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1;
+
+    text-decoration: none;
+    border: 1px solid transparent;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.cta-primary {
+    background-color: #355fd3;
+    color: #ffffff;
+}
+
+.cta-primary:hover {
+    background-color: #3f6ae1;
+}
+
+.cta-secondary {
+    background-color: transparent;
+    border-color: #8b5cf6;
+    color: #c4b5fd;
+}
+
+.cta-secondary:hover {
+    background-color: rgba(139, 92, 246, 0.12);
+    border-color: #a78bfa;
+    color: #e9d5ff;
+}
+
+.cta-pill svg {
+    fill: currentColor;
+}
+
+/* =========================================================
+   GRID WIDTH ALIGNMENT
+========================================================= */
+
+.sd-grid {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================================================
+   PAGE WIDTH OVERRIDES (Wide screens)
+========================================================= */
+
+@media (min-width: 1200px) {
+    :root {
+        --page-width: 1400px;
+        --content-width: 1400px;
+    }
+}
+
+@media (min-width: 1600px) {
+    :root {
+        --page-width: 1600px;
+        --content-width: 1600px;
+    }
+}
+
+/* =========================================================
+   SECTION TITLE SIZE (Breeze override)
+========================================================= */
+
+:root {
+    --pst-font-size-h2: 1.4rem;
+    --pst-font-size-h3: 1.3rem;
+}
