@@ -39,6 +39,31 @@ documentation:
 https://quant-kit.readthedocs.io/en/latest/index.html
 
 
+### ASCII Report
+
+Generate a fast portfolio performance report using `ascii_report`.
+If the input series represents **PnL**, set `kind="pnl"` and optionally
+specify the currency.
+
+```python
+import quant_kit
+
+report = quant_kit.ascii_report(
+    returns=portfolio_returns,
+    frequency="D",
+    strategy_name="My Portfolio",
+    kind="simple",
+)
+
+print(report)
+
+# Optional exports
+df = report.to_dataframe()
+data = report.to_dict()
+```
+
+
+
 ### 🪪 License
 ------------
 MIT © 2025 — Developed with ❤️ by Lorenzo Santarsieri & Tommaso Grandi
