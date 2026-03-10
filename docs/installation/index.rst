@@ -12,14 +12,14 @@ The recommended import pattern is the following:
 
 .. code-block:: python
 
-   import quant_kit as qt
+   import sigmaquant as qt
 
 For subpackage-oriented imports:
 
 .. code-block:: python
 
-   from quant_kit.performance import sharpe_ratio, drawdown
-   from quant_kit.research.autocorr import ljung_box
+   from sigmaquant.performance import sharpe_ratio, drawdown
+   from sigmaquant.research.autocorr import ljung_box
 
 Example
 ~~~~~~~~~~~~~~~~~~~~
@@ -27,7 +27,7 @@ Example
 .. code-block:: python
 
    import numpy as np
-   import quant_kit as qt
+   import sigmaquant as qt
 
    returns = np.array([0.2, 0.3, -0.5, 0.7, 0.2, 0.1, -0.7])
 

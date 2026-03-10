@@ -43,9 +43,9 @@ If the input series represents **PnL**, set `kind="pnl"` and optionally
 specify the currency.
 
 ```python
-import quant_kit
+import sigmaquant
 
-report = quant_kit.ascii_report(
+report = sigmaquant.ascii_report(
     returns=portfolio_returns,
     frequency="D",
     strategy_name="My Portfolio",

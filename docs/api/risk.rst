@@ -7,11 +7,11 @@ Functions for computing risk metrics.
    :toctree: generated/
    :nosignatures:
 
-   quant_kit.performance.risk.drawdown
-   quant_kit.performance.risk.max_drawdown
-   quant_kit.performance.risk.annual_vola
-   quant_kit.performance.risk.downside_risk
-   quant_kit.performance.risk.upside_risk
-   quant_kit.performance.risk.time_underwater
-   quant_kit.performance.risk.drawdown_stats
-   quant_kit.performance.risk.tail_ratio
+   sigmaquant.performance.risk.drawdown
+   sigmaquant.performance.risk.max_drawdown
+   sigmaquant.performance.risk.annual_vola
+   sigmaquant.performance.risk.downside_risk
+   sigmaquant.performance.risk.upside_risk
+   sigmaquant.performance.risk.time_underwater
+   sigmaquant.performance.risk.drawdown_stats
+   sigmaquant.performance.risk.tail_ratio

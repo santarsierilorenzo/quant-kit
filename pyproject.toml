@@ -1,5 +1,5 @@
 [project]
-name = "quant_kit"
+name = "sigmaquant"
 version = "0.1.0"
 description = "Python library providing performance, risk, and distribution metrics for quantitative finance workflows"
 readme = "README.md"

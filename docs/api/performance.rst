@@ -1,7 +1,7 @@
 Performance Subpackage
 ======================
 
-``quant_kit.performance`` groups all portfolio, performance, and risk modules.
+``sigmaquant.performance`` groups all portfolio, performance, and risk modules.
 
 .. toctree::
    :maxdepth: 1

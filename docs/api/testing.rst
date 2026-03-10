@@ -7,5 +7,5 @@ Utilities for statistical testing and research workflows.
    :toctree: generated/
    :nosignatures:
 
-   quant_kit.research.testing
+   sigmaquant.research.testing
 

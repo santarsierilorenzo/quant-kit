@@ -7,4 +7,4 @@ ASCII reporting utilities for portfolio analytics.
    :toctree: generated/
    :nosignatures:
 
-   quant_kit.performance.report.ascii_report
+   sigmaquant.performance.report.ascii_report
