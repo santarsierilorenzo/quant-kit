@@ -1,7 +1,7 @@
 API Reference
 =============
 
-This section contains the full Quant-Kit API documentation.
+This section contains the full Sigma-Quant API documentation.
 The package is organized in two subpackages:
 
 - ``sigmaquant.performance`` for portfolio/performance/risk analytics

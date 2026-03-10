@@ -1,10 +1,10 @@
 Installation
 =============
-Quant-Kit can be installed using ``pip``:
+Sigma-Quant can be installed using ``pip``:
 
 .. code-block:: bash
 
-   pip install quant-kit
+   pip install sigma-quant
 
 Import
 ~~~~~~~~~~~~~~~~~~~~

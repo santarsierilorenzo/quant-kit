@@ -5,21 +5,21 @@
 
        <div class="hero-content">
 
-         <h1 class="hero-title">Quant-Kit</h1>
+         <h1 class="hero-title">Sigma-Quant</h1>
 
          <p class="hero-subtitle">
            A clean, modern Python library for quantitative finance metrics.
          </p>
 
          <p>
-           Quant-Kit provides a collection of widely used performance and risk
+           Sigma-Quant provides a collection of widely used performance and risk
            metrics designed for research, backtesting, and portfolio analysis.
            The API is high-level, composable, and easy to integrate into
            existing codebases.
          </p>
 
          <p>
-           In addition to individual metrics, Quant-Kit emphasizes
+           In addition to individual metrics, Sigma-Quant emphasizes
            <em>clarity</em> and <em>correctness</em>, offering documentation
            that explains not only how each metric is computed, but also why
            specific design choices were made.
@@ -33,7 +33,7 @@
            </a>
 
            <a class="cta-pill cta-secondary"
-              href="https://github.com/santarsierilorenzo/quant-kit">
+              href="https://github.com/santarsierilorenzo/sigma-quant">
              <span class="cta-text">View on GitHub</span>
            </a>
 
