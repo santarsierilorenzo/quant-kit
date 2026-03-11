@@ -202,7 +202,12 @@ def sortino_ratio(
         return np.nan
 
     mean_excess = arr.mean() - mar
-    dsr = downside_risk(arr, frequency, mar)
+    dsr = downside_risk(
+        arr,
+        frequency=frequency,
+        m=mar,
+        annualize=False
+    )
 
     if dsr == 0.0:
         return np.nan

@@ -33,7 +33,7 @@ For the complete API reference, mathematical definitions, statistical
 conventions, and usage examples, please refer to the official
 documentation:
 
-https://sigma-quant.readthedocs.io/en/latest/index.html
+https://quant-kit.readthedocs.io/en/stable/index.html
 
 
 ### ASCII Report
